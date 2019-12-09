@@ -48,7 +48,21 @@ public class Demo {
             stmt.executeUpdate();
             stmt.close();
     }
-    //private static void insert_ad(Connection con, String title, String master, String schedule,
-                                  //int price, String style, String gender, String indiv_group)
+     /* private static void insert_ad(Connection con, String title, String master, String schedule,
+                                  int price, String style, String gender, String indiv_group) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO adult (title, master, schedule, price, style, gender, indiv_group) 
+                                                      VALUES (?, ?, ?, ?, ?, ?, ?)");
+        stmt.setString (1, title);
+        stmt.setString (2, master);
+        stmt.setString (3, schedule);
+        stmt.setInt (4, price);
+        stmt.setString (5, style);
+        stmt.setString(6, gender);
+        stmt.setString(7, indiv_group);
+                                                      
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    */
 }
 
