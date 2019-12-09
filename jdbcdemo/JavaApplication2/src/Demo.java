@@ -12,14 +12,14 @@ public class Demo {
         int i = 6;
         
         try{
-            //demo is table
+            //demo is database
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", user, pass);
             myStmt = myConn.createStatement();
             insert(myConn,"alikhan", "alikhan");
             myRs = myStmt.executeQuery("select * from players");
             
             //players is table
-            PreparedStatement ins = myConn.prepareStatement("INSERT INTO players (name, surname) VALUES('"+erlan+"','"+erlan+"')");
+            //PreparedStatement ins = myConn.prepareStatement("INSERT INTO players (name, surname) VALUES('"+erlan+"','"+erlan+"')");
             while(myRs.next()){
                 System.out.println(myRs.getString("surname") + ", " + myRs.getString("name"));
                 //surname and name is columns
@@ -48,5 +48,7 @@ public class Demo {
             stmt.executeUpdate();
             stmt.close();
     }
+    //private static void insert_ad(Connection con, String title, String master, String schedule,
+                                  //int price, String style, String gender, String indiv_group)
 }
 
