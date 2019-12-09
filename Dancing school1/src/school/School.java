@@ -3,6 +3,7 @@ package school;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import java.sql.*;
 
 
 public class School extends JFrame {
@@ -20,7 +21,14 @@ public class School extends JFrame {
     private EnrollToCourse enr_toCourse = null;
     private LookFor look_for = null;
     
-    public School(String s){
+    Connection con = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    String user = "student";
+    String pass = "student";
+    
+    
+    public School(String s) throws SQLException{
         super(s);
         courses = new ArrayList<>();
         Diary = new ArrayList<>();        
@@ -43,7 +51,14 @@ public class School extends JFrame {
         
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);      
+        setVisible(true);
+        
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dance_school", user, pass);
+        stmt = con.createStatement();
+        
+        
+        
+
     }
 
     public ArrayList<Courses> getCourses() {
@@ -130,5 +145,36 @@ public class School extends JFrame {
         y.setVisible(false);
         x.setVisible(true);
     }
+    public void insert_ad(Connection con, String title, String master, String schedule,
+                                  int price, String style, String gender, String indiv_group) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO adult (title, master, schedule, price, style, gender, indiv_group) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        stmt.setString (1, title);
+        stmt.setString (2, master);
+        stmt.setString (3, schedule);
+        stmt.setInt (4, price);
+        stmt.setString (5, style);
+        stmt.setString(6, gender);
+        stmt.setString(7, indiv_group);
+                                                      
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    
+    public void insert_kids(Connection con, String title, String master, String schedule,
+                                  int price, int age, String tour) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO kids (title, master, schedule, price, age, tour) VALUES (?, ?, ?, ?, ?, ?)");
+        stmt.setString (1, title);
+        stmt.setString (2, master);
+        stmt.setString (3, schedule);
+        stmt.setInt (4, price);
+        stmt.setInt (5, age);
+        stmt.setString(6, tour);
+        
+                                                      
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    
+    
     
 }
