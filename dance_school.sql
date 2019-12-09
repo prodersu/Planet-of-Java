@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 09 2019 г., 10:49
+-- Время создания: Дек 09 2019 г., 11:48
 -- Версия сервера: 10.1.35-MariaDB
 -- Версия PHP: 7.2.9
 
@@ -25,6 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `admin`
+--
+
+CREATE TABLE `admin` (
+  `login` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `income` int(250) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `adult`
 --
 
@@ -34,8 +47,7 @@ CREATE TABLE `adult` (
   `master` varchar(500) CHARACTER SET utf8 NOT NULL,
   `schedule` varchar(500) CHARACTER SET utf8 NOT NULL,
   `price` bigint(255) NOT NULL,
-  `sold` bigint(255) NOT NULL,
-  `count` int(255) NOT NULL,
+  `sold` bigint(255) DEFAULT '0',
   `style` varchar(500) CHARACTER SET utf8 NOT NULL,
   `gender` varchar(500) CHARACTER SET utf8 NOT NULL,
   `indiv_group` varchar(500) CHARACTER SET utf8 NOT NULL
@@ -51,7 +63,9 @@ CREATE TABLE `clients` (
   `id` int(250) NOT NULL,
   `login` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL,
-  `password` varchar(200) NOT NULL
+  `password` varchar(200) NOT NULL,
+  `titles in diary` varchar(500) NOT NULL,
+  `schedule` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -66,8 +80,7 @@ CREATE TABLE `kids` (
   `master` varchar(500) CHARACTER SET utf8 NOT NULL,
   `schedule` varchar(500) CHARACTER SET utf8 NOT NULL,
   `price` bigint(255) NOT NULL,
-  `sold` bigint(255) NOT NULL,
-  `count` int(255) NOT NULL,
+  `sold` bigint(255) NOT NULL DEFAULT '0',
   `age` int(100) NOT NULL,
   `tour` varchar(200) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
