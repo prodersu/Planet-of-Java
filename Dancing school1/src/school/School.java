@@ -22,8 +22,8 @@ public class School extends JFrame {
     private LookFor look_for = null;
     
     private Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
     String user = "student";
     String pass = "student";
     
@@ -62,6 +62,12 @@ public class School extends JFrame {
     }
     public Connection get_con(){
         return con;
+    }
+    public Statement get_stmt(){
+        return stmt;
+    }
+    public ResultSet get_rs(){
+        return rs;
     }
 
     public ArrayList<Courses> getCourses() {
