@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 class KidsAdd extends Container {
     private JLabel ltitle = null;       private JTextField ttitle = null;
@@ -67,7 +68,11 @@ class KidsAdd extends Container {
                 int age = Integer.parseInt(tage.getText()); tage.setText("");
                 c = new Kids(title, master, schedule, price, 0, 1, age, tour);
                 school.addCourse(c);
-                school.inser_kids(school.get_con(), title, master, schedule, price, age, tour_s);  
+                try {
+                    school.insert_kids(school.get_con(), title, master, schedule, price, age, tour_s);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
                 school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
         });

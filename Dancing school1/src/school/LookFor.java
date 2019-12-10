@@ -17,19 +17,25 @@ class LookFor extends Container {
         JTextField t = new JTextField();t.setBounds(300, 150, 200, 50);add(t);
         JLabel l2 = new JLabel("");l2.setBounds(300, 350, 200, 50);add(l2);
         JButton b = new ButtonStyle("Find");b.setLocation(300, 250);add(b);
-        JButton b2 = new ButtonStyle("Return");b2.setLocation(300,450);add(b2);
+        JButton b2 = new ButtonStyle("Return");b2.setLocation(300, 450);add(b2);
         
         b.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                
+            public void actionPerformed(ActionEvent e) {
                 int id = 0;
-                school.get_rs() = school.get_stmt().executeQuery("select id from adult where title like '+t.getText()+'");
-                id = school.get_rs().getInt("id");
-                if(id==0){
-                    school.get_rs() = school.get_stmt().executeQuery("select id from kids where title like '+t.getText()+'");
-                    id = school.get_rs().getInt("id");
+                ResultSet rs;
+                try {
+                    rs = school.get_stmt().executeQuery("select id from adult where title like '"+t.getText()+"'");
+
+                    id = rs.getInt("id");
+                    if (id == 0) {
+                        rs = school.get_stmt().executeQuery("select id from kids where title like '"+t.getText()+"'");
+                        id = rs.getInt("id");
+                    }
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
                 }
-                if(id>0)l2.setText("We found your query, it's id is: " + id);
+                if (id > 0) l2.setText("We found your query, it's id is: " + id);
                 else l2.setText("There is no course with that title");
             }
         });
@@ -40,7 +46,7 @@ class LookFor extends Container {
             }
         });
         setVisible(false);
-        setSize(600,400);
+        setSize(600, 400);
         setLayout(null);
     }
     

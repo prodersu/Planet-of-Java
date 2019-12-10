@@ -20,11 +20,12 @@ public class Income  extends Container{
     JButton b = new ButtonStyle("Return");
     b.setLocation(300, 100);
     add(b);
+
     b.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                school.switchFrame(school.getAdmin(), school.getIncome());
-            }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            school.switchFrame(school.getAdmin(), school.getIncome());
+        }
     });
     setVisible(false);
     setLayout(null);
@@ -34,10 +35,19 @@ public class Income  extends Container{
     public void printIncome(School school){
         String inc = "";
         int a=0;
-        school.get_rs() = shool.get_stmt().executeQuery("select income from admin");        
-        a = school.get_rs().getInt("income");
-        inc+="All income is "+a;
-        JOptionPane.showMessageDialog(Income.this, inc);
+
+        try {
+            ResultSet rs;
+            rs = school.get_stmt().executeQuery("select income from admin where id>0");
+            while (rs.next()){
+            a = rs.getInt("income");
+            inc+="All income is "+a;
+            }
+            JOptionPane.showMessageDialog(Income.this, inc);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+
     }
     
 }

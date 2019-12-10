@@ -3,6 +3,8 @@ package school;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 /**
  * Created by 28354 on 27.11.2019.
  */
@@ -21,7 +23,7 @@ public class AdultAdd extends Container {
     private String gender = null;       private ActionListener l3;
     private String indiv = null;        private ActionListener l4;
 
-    public AdultAdd(School school){
+    public AdultAdd(School school) throws SQLException{
 
         ltitle = new JLabel("ENTER TITLE:");ltitle.setBounds(20,100,150,50);add(ltitle);
         lstyle = new JLabel("ENTER STYLE:");lstyle.setBounds(20,200,150,50);add(lstyle);
@@ -83,8 +85,12 @@ public class AdultAdd extends Container {
             int price = Integer.parseInt(tprice.getText()); tprice.setText("");
             c = new Adult(title, master, schedule, price, 0, 1, style, gender, indiv);
             school.addCourse(c);
-            school.insert_ad(school.get_con(), title, master, schedule, price, style, gender, indiv);
-            JOptionPane.showMessageDialog(AdultAdd.this, "The course is added!");
+                try {
+                    school.insert_ad(school.get_con(), title, master, schedule, price, style, gender, indiv);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(AdultAdd.this, "The course is added!");
             school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
         });

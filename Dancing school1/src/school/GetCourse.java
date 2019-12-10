@@ -2,6 +2,7 @@
 package school;
 
 import java.awt.*;
+import java.sql.*;
 import javax.swing.*;
 
 class GetCourse extends Container {
@@ -10,18 +11,18 @@ class GetCourse extends Container {
     setLayout(null);
     setSize(800, 600);
     }
-    public void getCourse(School school){
-    if(school.getCourseSize()==0){
-        JOptionPane.showMessageDialog(GetCourse.this, "There aren't any courses in school..");
+    public void getCourse(School school) throws SQLException {
+
+        String Courses = "";
+        ResultSet rs;
+        rs = school.get_stmt().executeQuery("select * from adult");
+        while (rs.next()) {
+            Courses+= rs.getInt("id") + ". " +rs.getString("title") + rs.getString("style") + " master: "+rs.getString("master")+
+                    " on " + rs.getString("schedule") + "price: "
+                    + rs.getInt("price") + " for "+  rs.getString("gender") + " in "+  rs.getString("indiv_group");
         }
-    else{
-        String Courses = "There are ";
-            Courses += school.getCourseSize() + "courses in school\n";
-            for (int i = 0; i < school.getCourseSize(); i++) {
-                Courses += (i + 1) + school.getCourse(i).showDetails()+ "\n";
-            }
             JOptionPane.showMessageDialog(GetCourse.this, Courses);
-    }
+
             }
     
     

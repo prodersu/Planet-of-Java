@@ -17,6 +17,8 @@ public class School extends JFrame {
     private Income income = null;
     private Admin_or_Client admin_client = null;
     private MenuClient client = null;
+    private MenuSignInClient signInClient = null;
+    private Register reg = null;
     
     private EnrollToCourse enr_toCourse = null;
     private LookFor look_for = null;
@@ -30,9 +32,14 @@ public class School extends JFrame {
     
     public School(String s) throws SQLException{
         super(s);
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dance_school?useUnicode=true&serverTimezone=UTC", user, pass);
+        stmt = con.createStatement();
+        System.out.print("Database connected\n");
         courses = new ArrayList<>();
         Diary = new ArrayList<>();        
         signIn = new MenuSignIn (this);
+        signInClient = new MenuSignInClient(this);
+        reg = new Register(this);
         admin = new MenuAdmin(this);
         admin_add = new AdminAdd(this);
         getcourse = new GetCourse(this);
@@ -45,17 +52,15 @@ public class School extends JFrame {
         look_for = new LookFor(this);
         
         add(signIn);add(admin);add(admin_add);add(getcourse);add(rem_course);add(income);
-        add(admin_client);add(client);add(enr_toCourse);add(look_for);
+        add(admin_client);add(client);add(enr_toCourse);add(look_for);add(signInClient); add(reg);
         
-        setSize(800,600);
+        setSize(800, 600);
         
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dance_school", user, pass);
-        stmt = con.createStatement();
-        
+
         
         
 
@@ -63,11 +68,14 @@ public class School extends JFrame {
     public Connection get_con(){
         return con;
     }
-    public Statement get_stmt(){
-        return stmt;
+    public Statement get_stmt(){return stmt; }
+
+    public MenuSignInClient getSignInClient() {
+        return signInClient;
     }
-    public ResultSet get_rs(){
-        return rs;
+
+    public Register getReg() {
+        return reg;
     }
 
     public ArrayList<Courses> getCourses() {
@@ -130,6 +138,7 @@ public class School extends JFrame {
         return look_for;
     }
 
+    public String getLogin(){return getSignInClient().getLog()+getReg().getLog();}
     
     public void checkDiary(){
         if(Diary.size()==0)
@@ -159,12 +168,12 @@ public class School extends JFrame {
         PreparedStatement stmt = con.prepareStatement("INSERT INTO adult (title, master, schedule, price, style, gender, indiv_group) VALUES (?, ?, ?, ?, ?, ?, ?)");
         stmt.setString (1, title);
         stmt.setString (2, master);
-        stmt.setString (3, schedule);
-        stmt.setInt (4, price);
-        stmt.setString (5, style);
+        stmt.setString(3, schedule);
+        stmt.setInt(4, price);
+        stmt.setString(5, style);
         stmt.setString(6, gender);
         stmt.setString(7, indiv_group);
-                                                      
+
         stmt.executeUpdate();
         stmt.close();
     }

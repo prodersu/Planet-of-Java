@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class AdminAdd extends Container {
     private Container cont = null;
@@ -24,7 +25,7 @@ public class AdminAdd extends Container {
     }
 
 
-    public AdminAdd(School school){
+    public AdminAdd(School school) throws SQLException {
         adult = new AdultAdd(school);
         kids = new KidsAdd(school);
 

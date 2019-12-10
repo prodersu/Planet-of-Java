@@ -1,13 +1,14 @@
 package school;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
-public class MenuSignIn extends Container {
+public class MenuSignInClient extends Container {
     private JLabel llab = null;
     private JLabel plab = null;
     private JTextField lf = null;
@@ -15,8 +16,9 @@ public class MenuSignIn extends Container {
     private JButton ok = null;
     private JButton ok1 = null;
     private School school = null;
-    
-    public MenuSignIn(School school){
+    private String log = null;
+
+    public MenuSignInClient(School school){
         this.school = school;
         
          llab = new JLabel("LOGIN: ");
@@ -46,23 +48,21 @@ public class MenuSignIn extends Container {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String l = lf.getText();
+                log = lf.getText();
                 String p = pf.getText();
 
                 try {
                     ResultSet rs;
-                    String login = null;
                     String pas = null;
-                    rs = school.get_stmt().executeQuery("select * from admin where id>0");
+                    rs = school.get_stmt().executeQuery("select * from clients where login like '"+log+"'");
                     while (rs.next()) {
-                        login = rs.getString("login");
                         pas = rs.getString("password");
                     }
 
-                    if (l.equals(login) && p.equals(pas)) {
+                    if (p.equals(pas)) {
                         pf.setText("");
                         p = "";
-                        school.switchFrame(school.getAdmin(), school.getSignIn());
+                        school.switchFrame(school.getAdmin(), school.getSignInClient());
                     }
                 } catch (SQLException e1) {
                     e1.printStackTrace();
@@ -72,7 +72,7 @@ public class MenuSignIn extends Container {
         ok1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                school.switchFrame(school.getAdmin_client(), school.getSignIn());
+                school.switchFrame(school.getClient(), school.getSignInClient());
             }
         });
         
@@ -80,5 +80,6 @@ public class MenuSignIn extends Container {
         setLayout(null);
         setSize(800, 600);
     }
+    public String getLog(){return log;}
     
 }
