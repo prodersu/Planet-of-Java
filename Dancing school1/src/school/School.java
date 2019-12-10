@@ -21,7 +21,7 @@ public class School extends JFrame {
     private EnrollToCourse enr_toCourse = null;
     private LookFor look_for = null;
     
-    Connection con = null;
+    private Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     String user = "student";
@@ -59,6 +59,9 @@ public class School extends JFrame {
         
         
 
+    }
+    public Connection get_con(){
+        return con;
     }
 
     public ArrayList<Courses> getCourses() {
