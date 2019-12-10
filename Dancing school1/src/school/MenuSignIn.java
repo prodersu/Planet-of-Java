@@ -46,7 +46,10 @@ public class MenuSignIn extends Container {
             public void actionPerformed(ActionEvent e) {
                 String l = lf.getText();
                 String p = pf.getText();
-                if(l.equals("admin") && p.equals("admin")){
+                school.get_rs() = school.get_stmt().executeQuery("select * from admin");
+                String login = school.get_rs().getString("login");
+                String pass = school.get_rs().getstring("password");               
+                if(l.equals(login) && p.equals(pass)){
                     pf.setText("");
                     p = "";
                     school.switchFrame(school.getAdmin(), school.getSignIn());
