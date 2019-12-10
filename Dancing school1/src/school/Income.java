@@ -33,10 +33,8 @@ public class Income  extends Container{
     public void printIncome(School school){
         String inc = "";
         int a=0;
-        for (int i = 0; i < school.getCourseSize(); i++) {
-            
-            a+= school.getCourse(i).getSold()* school.getCourse(i).getPrice();
-        }
+        school.get_rs() = shool.get_stmt().executeQuery("select income from admin");        
+        a = school.get_rs().getInt("income");
         inc+="All income is "+a;
         JOptionPane.showMessageDialog(Income.this, inc);
     }
