@@ -83,7 +83,7 @@ public class AdultAdd extends Container {
             int price = Integer.parseInt(tprice.getText()); tprice.setText("");
             c = new Adult(title, master, schedule, price, 0, 1, style, gender, indiv);
             school.addCourse(c);
-            school.insert_ad(school.con, title, master, schedule, price, style, gender, indiv);
+            school.insert_ad(school.get_con(), title, master, schedule, price, style, gender, indiv);
             JOptionPane.showMessageDialog(AdultAdd.this, "The course is added!");
             school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
