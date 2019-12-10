@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 class LookFor extends Container {
     public LookFor(School school){
@@ -20,15 +21,16 @@ class LookFor extends Container {
         
         b.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean q = false;
-                for (int i = 0; i < school.getCourseSize(); i++) {
-                    if(school.getCourse(i).getTitle().equals(t.getText())){
-                        l2.setText("Its ID is: " + Integer.toString(i+1));
-                        q = true;
-                    }
+            public void actionPerformed(ActionEvent e) {                
+                int id = 0;
+                school.get_rs() = school.get_stmt().executeQuery("select id from adult where title like '+t.getText()+'");
+                id = school.get_rs().getInt("id");
+                if(id==0){
+                    school.get_rs() = school.get_stmt().executeQuery("select id from kids where title like '+t.getText()+'");
+                    id = school.get_rs().getInt("id");
                 }
-                if(!q) l2.setText("There is no course with that title");
+                if(id>0)l2.setText("We found your query, it's id is: " + id);
+                else l2.setText("There is no course with that title");
             }
         });
         b2.addActionListener(new ActionListener() {
