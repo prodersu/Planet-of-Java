@@ -59,11 +59,15 @@ class KidsAdd extends Container {
                 String title = ttitle.getText();ttitle.setText("");
                 String master = tmaster.getText(); tmaster.setText("");
                 boolean tour;
+                String tour_s;                
                 tour = yes.isSelected();
+                if(tour)tour_s = "yes";
+                else{tour_s = "no";}
                 int price = Integer.parseInt(tprice.getText()); tprice.setText("");
                 int age = Integer.parseInt(tage.getText()); tage.setText("");
                 c = new Kids(title, master, schedule, price, 0, 1, age, tour);
                 school.addCourse(c);
+                school.inser_kids(school.get_con(), title, master, schedule, price, age, tour_s);  
                 school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
         });
