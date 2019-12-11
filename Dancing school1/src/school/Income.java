@@ -50,6 +50,10 @@ public class Income  extends Container{
             }
             int i = a + k;
             inc+= k+ "\n All income is: " + i;
+            
+            CallableStatement stmt = school.get_con().prepareCall("UPDATE admin SET income = '"+i+"'");                                                                                     
+                stmt.executeUpdate();
+                stmt.close();
 
             JOptionPane.showMessageDialog(Income.this, inc);
         } catch (SQLException e1) {

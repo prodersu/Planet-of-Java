@@ -65,6 +65,15 @@ public class School extends JFrame {
         
 
     }
+
+    School() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
+
+   
     public Connection get_con(){
         return con;
     }
@@ -147,7 +156,7 @@ public class School extends JFrame {
         String diary = "YOU HAVE THESE COURSES : \n";
         rs = stmt.executeQuery("select * from clients where login like '"+getLogin()+"'");
         while (rs.next()){
-            diary+=rs.getString("titles in diary")+ " on " + rs.getString("schedule");
+            diary+=rs.getString("titles")+ " on " + rs.getString("schedule");
         }
         JOptionPane.showMessageDialog(School.this, diary);
     }

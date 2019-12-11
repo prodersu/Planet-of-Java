@@ -36,7 +36,7 @@ class EnrollToCourse extends Container {
                                     ResultSet rs2;
 
                                     try {
-                                        rs = school.get_stmt().executeQuery("select * from clients where login like '" + school.getLogin() + "'");
+                                        rs = school.get_stmt().executeQuery("select * from clients where login like '" + school.getSignInClient().getLog()+ "'");
                                         while (rs.next()) {
                                             diary1 = rs.getString("schedule");
                                             title1 = rs.getString("titles");
@@ -65,23 +65,25 @@ class EnrollToCourse extends Container {
                                         if (diary1.contains(diary)) {
                                             JOptionPane.showMessageDialog(EnrollToCourse.this, "You have already one course on " + diary);
                                         } else {
-                                            PreparedStatement stmt = school.get_con().prepareStatement("INSERT INTO clients (titles, schedule) VALUES (?,?) WHERE login LIKE '" + school.getLogin() + "'");
-                                            stmt.setString(1, title + "\n"+ title1);
-                                            stmt.setString(2, diary + "\n"+ diary1);
+                                            CallableStatement stmt = school.get_con().prepareCall("UPDATE clients SET titles = '"+title + "\n"+ title1+"' WHERE login = '" + school.getLogin() + "'");
+                                                                                        
 
                                             stmt.executeUpdate();
                                             stmt.close();
-                                            PreparedStatement stmt1;
+                                            
+                                            CallableStatement stmt2 = school.get_con().prepareCall("UPDATE clients SET schedule = '"+diary + "\n"+ diary1+"' WHERE login = '" + school.getLogin() + "'");
+                                            stmt2.executeUpdate();
+                                            stmt2.close();
+                                            CallableStatement stmt1;
                                             if (ra.isSelected()) {
-                                                stmt1 = school.get_con().prepareStatement("INSERT INTO adults (sold) VALUES(?) WHERE title = '"+title+"'");
-                                                stmt1.setInt(1, sold);
+                                                stmt1 = school.get_con().prepareCall("UPDATE adult SET sold = '"+sold+"' WHERE title = '"+title+"'");                                               
 
                                                 stmt1.executeUpdate();
                                                 stmt1.close();
                                             }
                                             else if (rk.isSelected()) {
-                                                stmt1 = school.get_con().prepareStatement("INSERT INTO kids (sold) VALUES(?) WHERE title = '"+title+"'");
-                                                stmt1.setInt(1,sold);
+                                                stmt1 = school.get_con().prepareCall("UPDATE kids SET sold = '"+sold+"' WHERE title = '"+title+"'");
+                                                
 
                                                 stmt1.executeUpdate();
                                                 stmt1.close();

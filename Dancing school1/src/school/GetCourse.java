@@ -28,7 +28,7 @@ class GetCourse extends Container {
                     " on " + rs.getString("schedule") + "price: "
                     + rs.getInt("price") + " for "+  rs.getString("age") + " tours?: "+  rs.getString("tour");
         }
-
+            
             JOptionPane.showMessageDialog(GetCourse.this, Courses);
 
             }
