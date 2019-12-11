@@ -134,64 +134,33 @@ public class School extends JFrame {
         return enr_toCourse;
     }
 
-    public LookFor getLook_for() {
+
+    public LookFor getLook_for()     {
         return look_for;
     }
 
     public String getLogin(){return getSignInClient().getLog()+getReg().getLog();}
+
     
-    public void checkDiary(){
-        if(Diary.size()==0)
-        {
-            JOptionPane.showMessageDialog(School.this, "YOU DIDN'T ENROLL IN ANY COURSES");
+    public void checkDiary() throws SQLException {
+        ResultSet rs;
+        String diary = "YOU HAVE THESE COURSES : \n";
+        rs = stmt.executeQuery("select * from clients where login like '"+getLogin()+"'");
+        while (rs.next()){
+            diary+=rs.getString("titles in diary")+ " on " + rs.getString("schedule");
         }
-        else
-        {
-            String diary = "You have " + (Diary.size()) + " courses in your Diary. \n";
-            int s = 0;
-            for (int i = 0; i<Diary.size(); i++)
-            {
-                diary+= (i+1) + "." +Diary.get(i) + " \n";
-            JOptionPane.showMessageDialog(School.this, diary);
-                
-            }
-        }
+        JOptionPane.showMessageDialog(School.this, diary);
     }
+
     
     public void switchFrame(Container x, Container y)
     {
         y.setVisible(false);
         x.setVisible(true);
     }
-    public void insert_ad(Connection con, String title, String master, String schedule,
-                                  int price, String style, String gender, String indiv_group) throws SQLException {
-        PreparedStatement stmt = con.prepareStatement("INSERT INTO adult (title, master, schedule, price, style, gender, indiv_group) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        stmt.setString (1, title);
-        stmt.setString (2, master);
-        stmt.setString(3, schedule);
-        stmt.setInt(4, price);
-        stmt.setString(5, style);
-        stmt.setString(6, gender);
-        stmt.setString(7, indiv_group);
 
-        stmt.executeUpdate();
-        stmt.close();
-    }
     
-    public void insert_kids(Connection con, String title, String master, String schedule,
-                                  int price, int age, String tour) throws SQLException {
-        PreparedStatement stmt = con.prepareStatement("INSERT INTO kids (title, master, schedule, price, age, tour) VALUES (?, ?, ?, ?, ?, ?)");
-        stmt.setString (1, title);
-        stmt.setString (2, master);
-        stmt.setString (3, schedule);
-        stmt.setInt (4, price);
-        stmt.setInt (5, age);
-        stmt.setString(6, tour);
-        
-                                                      
-        stmt.executeUpdate();
-        stmt.close();
-    }
+
     
     
     

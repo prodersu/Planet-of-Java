@@ -33,16 +33,24 @@ public class Income  extends Container{
     
     }
     public void printIncome(School school){
-        String inc = "";
+        String inc = "Income from Adult-courses: ";
         int a=0;
+        int k =0;
 
         try {
             ResultSet rs;
-            rs = school.get_stmt().executeQuery("select income from admin where id>0");
+            rs = school.get_stmt().executeQuery("select * from adult where id>0");
             while (rs.next()){
-            a = rs.getInt("income");
-            inc+="All income is "+a;
+                a+= rs.getInt("price")*rs.getInt("sold");
             }
+            inc += a + "\n Income from Kids-courses: ";
+            rs = school.get_stmt().executeQuery("select * from kids where id>0");
+            while (rs.next()){
+                k+= rs.getInt("price")*rs.getInt("sold");
+            }
+            int i = a + k;
+            inc+= k+ "\n All income is: " + i;
+
             JOptionPane.showMessageDialog(Income.this, inc);
         } catch (SQLException e1) {
             e1.printStackTrace();

@@ -14,7 +14,7 @@ public class Register extends Container {
     private JTextField tlog = null;
     private JPasswordField tpas = null;
     private JTextField tname = null;
-    private String log = null;
+    private String log = "";
 
     private JButton reg = null;
     private JButton cancel = null;
@@ -51,11 +51,13 @@ public class Register extends Container {
                     stmt.close();
 
                     JOptionPane.showMessageDialog(Register.this, "Client registered!");
+
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
 
                 school.switchFrame(school.getClient(), school.getReg());
+                System.out.println("Client with " + school.getLogin() + " login is connected");
             }
         });
         cancel.addActionListener(new ActionListener() {
@@ -69,5 +71,10 @@ public class Register extends Container {
         setSize(800, 600);
 
     }
+    public void setLog(String log) {
+        this.log = log;
+    }
     public String getLog(){return log;}
+
+
 }

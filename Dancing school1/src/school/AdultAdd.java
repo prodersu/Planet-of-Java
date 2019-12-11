@@ -3,6 +3,8 @@ package school;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -86,7 +88,7 @@ public class AdultAdd extends Container {
             c = new Adult(title, master, schedule, price, 0, 1, style, gender, indiv);
             school.addCourse(c);
                 try {
-                    school.insert_ad(school.get_con(), title, master, schedule, price, style, gender, indiv);
+                    insert_ad(school.get_con(), title, master, schedule, price, style, gender, indiv);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -98,6 +100,20 @@ public class AdultAdd extends Container {
         setVisible(false);
         setLayout(null);
         setSize(800,600);
+    }
+    public void insert_ad(Connection con, String title, String master, String schedule,
+                          int price, String style, String gender, String indiv_group) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO adult (title, master, schedule, price, style, gender, indiv_group) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        stmt.setString (1, title);
+        stmt.setString (2, master);
+        stmt.setString(3, schedule);
+        stmt.setInt(4, price);
+        stmt.setString(5, style);
+        stmt.setString(6, gender);
+        stmt.setString(7, indiv_group);
+
+        stmt.executeUpdate();
+        stmt.close();
     }
 
 }

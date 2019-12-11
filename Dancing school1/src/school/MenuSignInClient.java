@@ -16,7 +16,7 @@ public class MenuSignInClient extends Container {
     private JButton ok = null;
     private JButton ok1 = null;
     private School school = null;
-    private String log = null;
+    private String log = "";
 
     public MenuSignInClient(School school){
         this.school = school;
@@ -62,7 +62,8 @@ public class MenuSignInClient extends Container {
                     if (p.equals(pas)) {
                         pf.setText("");
                         p = "";
-                        school.switchFrame(school.getAdmin(), school.getSignInClient());
+                        school.switchFrame(school.getClient(), school.getSignInClient());
+                        System.out.println("Client with " + school.getLogin()+" login is connected");
                     }
                 } catch (SQLException e1) {
                     e1.printStackTrace();
@@ -72,7 +73,7 @@ public class MenuSignInClient extends Container {
         ok1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                school.switchFrame(school.getClient(), school.getSignInClient());
+                school.switchFrame(school.getAdmin_client(), school.getSignInClient());
             }
         });
         
@@ -80,6 +81,10 @@ public class MenuSignInClient extends Container {
         setLayout(null);
         setSize(800, 600);
     }
+    public void setLog(String log) {
+        this.log = log;
+    }
     public String getLog(){return log;}
-    
+
+
 }

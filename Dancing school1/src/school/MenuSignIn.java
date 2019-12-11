@@ -60,6 +60,7 @@ public class MenuSignIn extends Container {
                     }
 
                     if (l.equals(login) && p.equals(pas)) {
+                        lf.setText("");
                         pf.setText("");
                         p = "";
                         school.switchFrame(school.getAdmin(), school.getSignIn());

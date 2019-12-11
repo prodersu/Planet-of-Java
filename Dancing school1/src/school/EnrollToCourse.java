@@ -16,10 +16,11 @@ class EnrollToCourse extends Container {
     public EnrollToCourse(School school, ArrayList<String> Diary){
         JLabel l = new JLabel("Enter course ID:");l.setBounds(300, 50, 200, 50);add(l);
         JTextField t = new JTextField();t.setBounds(300, 150, 200, 50);add(t);
-        JRadioButton ra = new JRadioButton("adult"); ra.setLocation(300, 250); add(ra);
-        JRadioButton rk = new JRadioButton("kids"); rk.setLocation(350, 250); add(rk);
+        JRadioButton ra = new JRadioButton("adult"); ra.setBounds(300, 250, 100, 50); add(ra);
+        JRadioButton rk = new JRadioButton("kids"); rk.setBounds(410, 250, 100, 50); add(rk);
         JButton b = new ButtonStyle("Enroll");b.setLocation(300, 350);add(b);
         JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300, 450); add(cancel);
+
 
         b.addActionListener(new ActionListener() {
                                 @Override
@@ -28,16 +29,25 @@ class EnrollToCourse extends Container {
                                     int j = Integer.parseInt(t.getText());
                                     String diary = "";
                                     String diary1 = "";
+                                    String title1 = "";
                                     String title = "";
+                                    int sold = 0;
                                     ResultSet rs;
                                     ResultSet rs2;
+
                                     try {
-                                        rs = school.get_stmt().executeQuery("select * from client where login like '" + school.getLogin() + "'");
+                                        rs = school.get_stmt().executeQuery("select * from clients where login like '" + school.getLogin() + "'");
+                                        while (rs.next()) {
+                                            diary1 = rs.getString("schedule");
+                                            title1 = rs.getString("titles");
+                                        }
+
                                         if (ra.isSelected()) {
                                             rs2 = school.get_stmt().executeQuery("select * from adult where id like '" + j + "'");
                                             while (rs2.next()) {
                                                 diary = rs2.getString("schedule");
                                                 title = rs2.getString("title");
+                                                sold = rs2.getInt("sold");
 
                                             }
                                         } else if (rk.isSelected()) {
@@ -45,21 +55,38 @@ class EnrollToCourse extends Container {
                                             while (rs2.next()) {
                                                 diary = rs2.getString("schedule");
                                                 title = rs2.getString("title");
+                                                sold = rs2.getInt("sold");
 
                                             }
                                         }
-                                        while (rs.next()) {
-                                            diary1 = rs.getString("schedule");
-                                        }
-                                        if (diary == diary1) {
+                                        sold++;
+
+
+                                        if (diary1.contains(diary)) {
                                             JOptionPane.showMessageDialog(EnrollToCourse.this, "You have already one course on " + diary);
                                         } else {
-                                            PreparedStatement stmt = school.get_con().prepareStatement("INSERT INTO clients (titles in diary, schedule) VALUES (?,?)");
-                                            stmt.setString(1, title);
-                                            stmt.setString(2, diary);
+                                            PreparedStatement stmt = school.get_con().prepareStatement("INSERT INTO clients (titles, schedule) VALUES (?,?) WHERE login LIKE '" + school.getLogin() + "'");
+                                            stmt.setString(1, title + "\n"+ title1);
+                                            stmt.setString(2, diary + "\n"+ diary1);
 
                                             stmt.executeUpdate();
                                             stmt.close();
+                                            PreparedStatement stmt1;
+                                            if (ra.isSelected()) {
+                                                stmt1 = school.get_con().prepareStatement("INSERT INTO adults (sold) VALUES(?) WHERE title = '"+title+"'");
+                                                stmt1.setInt(1, sold);
+
+                                                stmt1.executeUpdate();
+                                                stmt1.close();
+                                            }
+                                            else if (rk.isSelected()) {
+                                                stmt1 = school.get_con().prepareStatement("INSERT INTO kids (sold) VALUES(?) WHERE title = '"+title+"'");
+                                                stmt1.setInt(1,sold);
+
+                                                stmt1.executeUpdate();
+                                                stmt1.close();
+                                            }
+                                            JOptionPane.showMessageDialog(EnrollToCourse.this, "THANKS FOR ENROLLING, SEE YOU SOON ON "+ diary);
                                         }
                                     } catch (SQLException e1) {
                                         e1.printStackTrace();

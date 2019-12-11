@@ -14,10 +14,12 @@ import java.sql.*;
 class LookFor extends Container {
     public LookFor(School school){
         JLabel l = new JLabel("Enter course's title: ");l.setBounds(300,50,200,50);add(l);
+        JRadioButton ra = new JRadioButton("adult"); ra.setBounds(300,250,100,50);add(ra);
+        JRadioButton rk = new JRadioButton("kids"); rk.setBounds(400,250,100,50);add(rk);
         JTextField t = new JTextField();t.setBounds(300, 150, 200, 50);add(t);
+        JButton b = new ButtonStyle("Find");b.setLocation(300, 450);add(b);
         JLabel l2 = new JLabel("");l2.setBounds(300, 350, 200, 50);add(l2);
-        JButton b = new ButtonStyle("Find");b.setLocation(300, 250);add(b);
-        JButton b2 = new ButtonStyle("Return");b2.setLocation(300, 450);add(b2);
+        JButton b2 = new ButtonStyle("Return");b2.setLocation(300, 550);add(b2);
         
         b.addActionListener(new ActionListener() {
             @Override
@@ -25,17 +27,23 @@ class LookFor extends Container {
                 int id = 0;
                 ResultSet rs;
                 try {
-                    rs = school.get_stmt().executeQuery("select id from adult where title like '"+t.getText()+"'");
-
-                    id = rs.getInt("id");
-                    if (id == 0) {
-                        rs = school.get_stmt().executeQuery("select id from kids where title like '"+t.getText()+"'");
-                        id = rs.getInt("id");
+                    if (ra.isSelected()) {
+                        rs = school.get_stmt().executeQuery("select * from adult where title like '" + t.getText() + "'");
+                        while (rs.next()) {
+                            id = rs.getInt("id");
+                        }
+                    } else if (rk.isSelected()) {
+                        rs = school.get_stmt().executeQuery("select * from kids where title like '" + t.getText() + "'");
+                        while (rs.next()) {
+                            id = rs.getInt("id");
+                        }
                     }
+                    if (id > 0) l2.setText("We found your query, it's id: " + id);
+                    else l2.setText("There is no course with that title");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-                if (id > 0) l2.setText("We found your query, it's id is: " + id);
+                if (id > 0) l2.setText("We found your query, it's id: " + id);
                 else l2.setText("There is no course with that title");
             }
         });
@@ -46,7 +54,7 @@ class LookFor extends Container {
             }
         });
         setVisible(false);
-        setSize(600, 400);
+        setSize(800, 600);
         setLayout(null);
     }
     

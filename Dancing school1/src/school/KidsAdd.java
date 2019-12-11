@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 class KidsAdd extends Container {
@@ -69,7 +71,7 @@ class KidsAdd extends Container {
                 c = new Kids(title, master, schedule, price, 0, 1, age, tour);
                 school.addCourse(c);
                 try {
-                    school.insert_kids(school.get_con(), title, master, schedule, price, age, tour_s);
+                    insert_kids(school.get_con(), title, master, schedule, price, age, tour_s);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -79,5 +81,19 @@ class KidsAdd extends Container {
         setVisible(false);
         setLayout(null);
         setSize(800, 600);
+    }
+    public void insert_kids(Connection con, String title, String master, String schedule,
+                            int price, int age, String tour) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO kids (title, master, schedule, price, age, tour) VALUES (?, ?, ?, ?, ?, ?)");
+        stmt.setString (1, title);
+        stmt.setString (2, master);
+        stmt.setString (3, schedule);
+        stmt.setInt (4, price);
+        stmt.setInt (5, age);
+        stmt.setString(6, tour);
+
+
+        stmt.executeUpdate();
+        stmt.close();
     }
 }

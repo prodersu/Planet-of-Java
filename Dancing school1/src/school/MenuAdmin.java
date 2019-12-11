@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 public class MenuAdmin extends Container {
@@ -26,13 +27,22 @@ public class MenuAdmin extends Container {
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                school.getGetcourse().getCourse(school);
+                try {
+                    school.getGetcourse().getCourse(school);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                school.switchFrame(school.getRem_course(), school.getAdmin());                
+                school.switchFrame(school.getRem_course(), school.getAdmin());
+                try {
+                    school.getGetcourse().getCourse(school);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         
