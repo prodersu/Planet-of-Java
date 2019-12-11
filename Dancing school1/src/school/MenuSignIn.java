@@ -36,11 +36,11 @@ public class MenuSignIn extends Container {
         add(pf);
 
         ok = new ButtonStyle("LOG IN");
-        ok.setLocation(100, 300);
+        ok.setLocation(200, 300);
         add(ok);
         
         ok1 = new ButtonStyle("CANCEL");
-        ok1.setLocation(350, 300);
+        ok1.setLocation(450, 300);
         add(ok1);
         
         ok.addActionListener(new ActionListener() {

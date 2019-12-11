@@ -7,6 +7,6 @@ import java.sql.*;
 public class Main {
     public static void main (String[] args) throws SQLException {
     School s = new School("*****DANCING SCHOOL****");
-    s.setLocation(500,250);
+    s.setLocation(400,100);
     }
 }

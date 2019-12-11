@@ -108,7 +108,7 @@ class EnrollToCourse extends Container {
 
             setVisible(false);
 
-            setSize(600, 400);
+            setSize(800, 600);
 
             setLayout(null);
         }

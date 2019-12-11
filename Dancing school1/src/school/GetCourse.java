@@ -18,7 +18,7 @@ class GetCourse extends Container {
         rs = school.get_stmt().executeQuery("select * from adult");
         while (rs.next()) {
             Courses+= rs.getInt("id") + ". " +rs.getString("title") + " " + rs.getString("style") + " master: "+rs.getString("master")+
-                    " on " + rs.getString("schedule") + "price: "
+                    " on " + rs.getString("schedule") + " price: "
                     + rs.getInt("price") + " for "+  rs.getString("gender") + " in "+  rs.getString("indiv_group" ) + "\n";
         }
         Courses+="FOR KIDS: \n";

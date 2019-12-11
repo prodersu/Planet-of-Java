@@ -26,8 +26,8 @@ public class School extends JFrame {
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    String user = "student";
-    String pass = "student";
+    String user = "root";
+    String pass = "";
     
     
     public School(String s) throws SQLException{
@@ -55,7 +55,12 @@ public class School extends JFrame {
         add(admin_client);add(client);add(enr_toCourse);add(look_for);add(signInClient); add(reg);
         
         setSize(800, 600);
-        
+
+        ImageIcon img = new ImageIcon("D:\\image.jpg");
+        JLabel l1 = new JLabel("", img, JLabel.CENTER);
+        l1.setBounds(0, 0, 800, 600);
+        add(l1);
+
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
