@@ -13,7 +13,13 @@ import java.awt.event.ActionListener;
 public class Admin_or_Client extends Container {
     public Admin_or_Client(School school){
         JPanel p = new JPanel();p.setLayout(null);
-        p.setBorder(new TitledBorder(null, "<html><h2>Welcome to Dancing School!!!</h2>"));p.setBounds(100, 100, 570, 100);
+        p.setBackground(Color.decode("#00BFFF"));
+        TitledBorder title = new TitledBorder(null, "Welcome to Dancing School!!!");
+        title.setTitleJustification(TitledBorder.CENTER);
+        title.setTitleColor(Color.decode("#C71585"));
+        Font font = new Font("Serif", Font.BOLD, 26);
+        title.setTitleFont(font);
+        p.setBorder(title);p.setBounds(100, 100, 570, 100);
         JButton a = new ButtonStyle("Admin");a.setLocation(150,150);add(a);
         JButton c = new ButtonStyle("Client");c.setLocation(400,150);add(c);
         JButton r = new ButtonStyle("Register"); r.setLocation(270, 300); add(r);

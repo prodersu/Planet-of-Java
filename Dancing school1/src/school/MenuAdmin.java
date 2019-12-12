@@ -12,11 +12,11 @@ public class MenuAdmin extends Container {
     public MenuAdmin(School school){
         this.school = school;
         
-        JButton b1 = new JButton("Add new course"); b1.setBounds(300, 50, 200, 50); add(b1);  
-        JButton b2 = new JButton("Courses' List"); b2.setBounds(300, 150,200, 50); add(b2);
-        JButton b3 = new JButton("Remove course"); b3.setBounds(300, 250, 200, 50); add(b3);
-        JButton b4 = new JButton("Income"); b4.setBounds(300, 350, 200, 50); add(b4);
-        JButton b5 = new JButton("Log out"); b5.setBounds(300, 450, 200, 50); add(b5);
+        JButton b1 = new ButtonStyle("Add new course"); b1.setBounds(300, 50, 200, 50); add(b1);
+        JButton b2 = new ButtonStyle("Courses' List"); b2.setBounds(300, 150,200, 50); add(b2);
+        JButton b3 = new ButtonStyle("Remove course"); b3.setBounds(300, 250, 200, 50); add(b3);
+        JButton b4 = new ButtonStyle("Income"); b4.setBounds(300, 350, 200, 50); add(b4);
+        JButton b5 = new ButtonStyle("Log out"); b5.setBounds(300, 450, 200, 50); add(b5);
         
         b1.addActionListener(new ActionListener() {
             @Override

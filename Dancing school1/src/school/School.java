@@ -161,7 +161,7 @@ public class School extends JFrame {
         String diary = "YOU HAVE THESE COURSES : \n";
         rs = stmt.executeQuery("select * from clients where login like '"+getLogin()+"'");
         while (rs.next()){
-            diary+=rs.getString("titles")+ " on " + rs.getString("schedule");
+            diary+=rs.getString("titles")+ " on " + rs.getString("schedule") + "\n Name : " + rs.getString("name");
         }
         JOptionPane.showMessageDialog(School.this, diary);
     }
