@@ -56,7 +56,7 @@ public class School extends JFrame {
         
         setSize(800, 600);
 
-        ImageIcon img = new ImageIcon("D:\\image.jpg");
+        ImageIcon img = new ImageIcon("D:\\school\\image3.jpg");
         JLabel l1 = new JLabel("", img, JLabel.CENTER);
         l1.setBounds(0, 0, 800, 600);
         add(l1);
