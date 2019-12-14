@@ -16,16 +16,33 @@ import javax.swing.*;
 
 class CourseRemove extends Container {
     public CourseRemove(School school){
-        JLabel l = new JLabel("Enter course's id");
+        ImageIcon img = new ImageIcon("D:\\image3.jpg");
+        JLabel l6 = new JLabel("", img, JLabel.CENTER);
+        l6.setBounds(0, 0, 800, 600);
+        
+        JLabel l = new JLabelStyle("Enter course's id");
         l.setBounds(250,50,300,100);add(l);
-        JTextField t = new JTextField(); 
-        t.setBounds(250, 200, 300, 100); add(t);
-        JRadioButton ra = new JRadioButton("adult"); ra.setBounds(250, 350, 100, 50); add(ra);
-        JRadioButton rk = new JRadioButton("kids"); rk.setBounds(360, 350, 100, 50); add(rk);
+        JTextField t = new JTextFieldS(); 
+        t.setBounds(250, 200, 300, 50); add(t);
+        JRadioButton ra = new JRadioButton("adult"); ra.setBounds(250, 300, 100, 50); add(ra);
+        JRadioButton rk = new JRadioButton("kids"); rk.setBounds(360, 300, 100, 50); add(rk);
         JButton b = new ButtonStyle("Remove");
-        b.setLocation(250, 450); add(b);        
+        b.setLocation(250, 400); add(b);        
         JButton c = new ButtonStyle("CANCEL");
-        c.setLocation(250, 530);
+        c.setLocation(250, 480); add(c);
+        add(l6);
+        ra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(ra.isSelected())rk.doClick(1);
+            }
+            });
+        rk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(rk.isSelected())ra.doClick(1);
+            }
+            });
         
         b.addActionListener(new ActionListener() {
             @Override

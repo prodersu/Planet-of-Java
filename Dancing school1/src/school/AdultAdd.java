@@ -11,6 +11,8 @@ import java.sql.SQLException;
  * Created by 28354 on 27.11.2019.
  */
 public class AdultAdd extends Container {
+    
+    
 
     private JLabel ltitle = null;       private JTextField ttitle = null;
     private JLabel lstyle = null;       private JComboBox<String> tstyle = null;
@@ -26,29 +28,34 @@ public class AdultAdd extends Container {
     private String indiv = null;        private ActionListener l4;
 
     public AdultAdd(School school) throws SQLException{
-
-        ltitle = new JLabel("ENTER TITLE:");ltitle.setBounds(20,100,150,50);add(ltitle);
-        lstyle = new JLabel("ENTER STYLE:");lstyle.setBounds(20,200,150,50);add(lstyle);
-        lmaster= new JLabel("ENTER MASTER:");lmaster.setBounds(20,300,150,50);add(lmaster);
-        lschedule = new JLabel("ENTER SCHEDULE:");lschedule.setBounds(20,400,150,50); add(lschedule);
-        lprice = new JLabel("ENTER PRICE:");lprice.setBounds(420, 100, 150, 50);add(lprice);
-        lgender = new JLabel("MAN OR WOMAN");lgender.setBounds(420,200,150,50); add(lgender);
-        lindiv = new JLabel("INDIVIDUAL OR GROUP");lindiv.setBounds(420,300,150,50); add(lindiv);
         
-        ttitle = new JTextField(); ttitle.setBounds(220,100,150,50);add(ttitle);
+        ImageIcon img = new ImageIcon("D:\\image3.jpg");
+        JLabel l6 = new JLabel("", img, JLabel.CENTER);
+        l6.setBounds(0, 0, 800, 600);
+
+        ltitle = new JLabelStyle("TITLE:");ltitle.setBounds(20,100,150,50);add(ltitle);
+        lstyle = new JLabelStyle("STYLE:");lstyle.setBounds(20,200,150,50);add(lstyle);
+        lmaster= new JLabelStyle("MASTER:");lmaster.setBounds(20,300,150,50);add(lmaster);
+        lschedule = new JLabelStyle("SCHEDULE:");lschedule.setBounds(20,400,150,50); add(lschedule);
+        lprice = new JLabelStyle("PRICE:");lprice.setBounds(420, 100, 150, 50);add(lprice);
+        lgender = new JLabelStyle("MAN/WOMAN");lgender.setBounds(420,200,150,50); add(lgender);
+        lindiv = new JLabelStyle("IND OR GR");lindiv.setBounds(420,300,150,50); add(lindiv);
+        
+        ttitle = new JTextFieldS(); ttitle.setBounds(220,100,150,50);add(ttitle);
         tstyle = new JComboBox(); tstyle.setBounds(220,200,150,50);
         tstyle.addItem("National dance"); tstyle.addItem("Ballroom dance"); tstyle.addItem("Club Latine"); 
         tstyle.addItem("Fitness Yoga"); tstyle.addItem("Tango dance"); tstyle.addItem("Lady's style"); tstyle.addItem("Zumba");add(tstyle);
-        tmaster = new JTextField(); tmaster.setBounds(220,300,150,50); add(tmaster);
+        tmaster = new JTextFieldS(); tmaster.setBounds(220,300,150,50); add(tmaster);
         tschedule = new JComboBox(); tschedule.setBounds(220, 400, 150, 50); 
         tschedule.addItem("Monday"); tschedule.addItem("Tuesday"); tschedule.addItem("Wednesday");
         tschedule.addItem("Thursday"); tschedule.addItem("Friday"); 
         tschedule.addItem("Saturday"); add(tschedule);
-        tprice = new JTextField(); tprice.setBounds(620, 100, 150, 50); add(tprice);
+        tprice = new JTextFieldS(); tprice.setBounds(620, 100, 150, 50); add(tprice);
         tgender = new JComboBox(); tgender.setBounds(620, 200, 150, 50); 
         tgender.addItem("Man"); tgender.addItem("Woman"); add(tgender);
         tindiv = new JComboBox(); tindiv.setBounds(620, 300, 150, 50);
         tindiv.addItem("Individual"); tindiv.addItem("Group");add(tindiv);
+        
         
         l1 = (ActionEvent e) ->{
             JComboBox box = (JComboBox)e.getSource();
@@ -71,14 +78,14 @@ public class AdultAdd extends Container {
         };
         tindiv.addActionListener(l4);
         
-        JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300,480);add(cancel);
+        JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300,460);add(cancel);
         cancel.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
             school.switchFrame(school.getAdmin(),school.getAdmin_add() );
             }
         });
-        JButton add = new ButtonStyle("ADD"); add.setLocation(300, 530);add(add);
+        JButton add = new ButtonStyle("ADD"); add.setLocation(300, 510);add(add);
         add.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -96,7 +103,7 @@ public class AdultAdd extends Container {
             school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
         });
-        
+        add(l6);
         setVisible(false);
         setLayout(null);
         setSize(800,600);

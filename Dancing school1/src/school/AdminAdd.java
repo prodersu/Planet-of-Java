@@ -34,10 +34,16 @@ public class AdminAdd extends Container {
 
         ButtonGroup bg = new ButtonGroup();
         JToggleButton ad = new JToggleButton("ADULT");
+        ad.setBackground(java.awt.Color.decode("#20B2AA"));
+        ad.setForeground(java.awt.Color.decode("#FF00FF"));
+        Font font = new Font("Serif", Font.PLAIN, 20);
+        ad.setFont(font);
         ad.setBounds(180, 20, 200, 50);bg.add(ad);add(ad);
         JToggleButton kid = new JToggleButton("KIDS");
         kid.setBounds(420, 20, 200, 50);bg.add(kid);add(kid);
-
+        kid.setBackground(java.awt.Color.decode("#20B2AA"));
+        kid.setForeground(java.awt.Color.decode("#FF00FF"));        
+        kid.setFont(font);
 
         add(adult);add(kids);
 

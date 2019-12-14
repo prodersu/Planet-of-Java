@@ -11,13 +11,17 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 class MenuClient extends Container{
-    public MenuClient(School school){
+    public MenuClient(School school){        
+        ImageIcon img = new ImageIcon("D:\\image2.jpg");
+        JLabel l1 = new JLabel("", img, JLabel.CENTER);
+        l1.setBounds(0, 0, 800, 600);
+        
         JButton b1 = new ButtonStyle("Courses' List");b1.setLocation(300,50);add(b1);
         JButton b2 = new ButtonStyle("Enroll to course"); b2.setLocation(300,150);add(b2);
         JButton b3 = new ButtonStyle("Search course");b3.setLocation(300,250);add(b3);
         JButton b4 = new ButtonStyle("My Diary");b4.setLocation(300,350);add(b4);
         JButton b5 = new ButtonStyle("Log out");b5.setLocation(300, 450);add(b5);
-        
+        add(l1);
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,11 +36,7 @@ class MenuClient extends Container{
              @Override
              public void actionPerformed(ActionEvent e) {
                  school.switchFrame(school.getEnr_toCourse(), school.getClient());
-                 try {
-                     school.getGetcourse().getCourse(school);
-                 } catch (SQLException e1) {
-                     e1.printStackTrace();
-                 }
+                 
              }
          });
          b3.addActionListener(new ActionListener() {

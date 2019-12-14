@@ -18,20 +18,26 @@ public class MenuSignIn extends Container {
     
     public MenuSignIn(School school){
         this.school = school;
+        ImageIcon img = new ImageIcon("D:\\image1.jpg");
+        JLabel l1 = new JLabel("", img, JLabel.CENTER);
+        l1.setBounds(0, 0, 800, 600);
         
-         llab = new JLabel("LOGIN: ");
+        
+         llab = new JLabelStyle("LOGIN: ");
+        
         llab.setBounds(200, 100, 200, 50);
         add(llab);
 
-        plab = new JLabel("PASSWORD: ");
+        plab = new JLabelStyle("PASSWORD: ");
         plab.setBounds(200, 200, 200, 50);
         add(plab);
 
-        lf = new JTextField();
+        lf = new JTextFieldS();
         lf.setBounds(450, 100, 200, 50);
         add(lf);
 
         pf = new JPasswordField();
+        pf.setEchoChar('#');
         pf.setBounds(450, 200, 200, 50);
         add(pf);
 
@@ -42,6 +48,7 @@ public class MenuSignIn extends Container {
         ok1 = new ButtonStyle("CANCEL");
         ok1.setLocation(450, 300);
         add(ok1);
+        add(l1);
         
         ok.addActionListener(new ActionListener() {
             @Override

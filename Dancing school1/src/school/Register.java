@@ -20,20 +20,24 @@ public class Register extends Container {
     private JButton cancel = null;
 
     public Register(School school){
-        llog = new JLabel("LOGIN"); llog.setBounds(200, 100, 200, 50);add(llog);
-        lpas = new JLabel("PASSWORD"); lpas.setBounds(200, 200, 200, 50);add(lpas);
-        lname = new JLabel("NAME"); lname.setBounds(200, 300, 200, 50);add(lname);
+        llog = new JLabelStyle("LOGIN"); llog.setBounds(200, 100, 200, 50);add(llog);
+        lpas = new JLabelStyle("PASSWORD"); lpas.setBounds(200, 200, 200, 50);add(lpas);
+        lname = new JLabelStyle("NAME"); lname.setBounds(200, 300, 200, 50);add(lname);
 
-        tlog = new JTextField(); tlog.setBounds(450, 100,200,50);add(tlog);
-        tpas = new JPasswordField(); tpas.setBounds(450, 200, 200,50); add(tpas);
-        tname = new JTextField(); tname.setBounds(450,300,200,50); add(tname);
+        tlog = new JTextFieldS(); tlog.setBounds(450, 100,200,50);add(tlog);
+        tpas = new JPasswordField();tpas.setEchoChar('#');
+        tpas.setBounds(450, 200, 200,50); add(tpas);
+        tname = new JTextFieldS(); tname.setBounds(450,300,200,50); add(tname);
 
         reg = new ButtonStyle("REGISTER");
         reg.setLocation(200, 500); add(reg);
 
         cancel = new ButtonStyle("CANCEL");
         cancel.setLocation(450,500); add(cancel);
-
+        ImageIcon img = new ImageIcon("D:\\image1.jpg");
+        JLabel l6 = new JLabel("", img, JLabel.CENTER);
+        l6.setBounds(0, 0, 800, 600);
+        add(l6);
         reg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

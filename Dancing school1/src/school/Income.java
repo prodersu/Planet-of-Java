@@ -17,10 +17,15 @@ import java.sql.*;
  */
 public class Income  extends Container{
     public Income(School school){
-    JButton b = new ButtonStyle("Return");
+        
+        
+    JButton b = new ButtonStyle("CANCEL");
     b.setLocation(300, 100);
     add(b);
-
+    ImageIcon img = new ImageIcon("D:\\image3.jpg");
+    JLabel l6 = new JLabel("", img, JLabel.CENTER);
+    l6.setBounds(0, 0, 800, 600);
+    add(l6);
     b.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

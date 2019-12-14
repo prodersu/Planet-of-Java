@@ -14,14 +14,31 @@ import java.awt.event.ActionListener;
 
 class EnrollToCourse extends Container {
     public EnrollToCourse(School school, ArrayList<String> Diary){
-        JLabel l = new JLabel("Enter course ID:");l.setBounds(300, 50, 200, 50);add(l);
-        JTextField t = new JTextField();t.setBounds(300, 150, 200, 50);add(t);
+        
+        ImageIcon img = new ImageIcon("D:\\image3.jpg");
+        JLabel l6 = new JLabel("", img, JLabel.CENTER);
+        l6.setBounds(0, 0, 800, 600);
+        
+        JLabel l = new JLabelStyle("Enter course ID:");l.setBounds(300, 50, 200, 50);add(l);
+        JTextField t = new JTextFieldS();t.setBounds(300, 150, 200, 50);add(t);
         JRadioButton ra = new JRadioButton("adult"); ra.setBounds(300, 250, 100, 50); add(ra);
         JRadioButton rk = new JRadioButton("kids"); rk.setBounds(410, 250, 100, 50); add(rk);
         JButton b = new ButtonStyle("Enroll");b.setLocation(300, 350);add(b);
         JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300, 450); add(cancel);
 
-
+        add(l6);
+        ra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(ra.isSelected())rk.doClick(1);
+            }
+            });
+        rk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(rk.isSelected())ra.doClick(1);
+            }
+            });
         b.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {

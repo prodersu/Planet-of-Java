@@ -22,40 +22,46 @@ class KidsAdd extends Container {
 
     public KidsAdd(School school)
     {
-        ltitle = new JLabel("ENTER TITLE:");ltitle.setBounds(20, 100, 150, 50);add(ltitle);
-        lage = new JLabel("Enter Age:");lage.setBounds(20, 200, 150, 50);add(lage);
-        lmaster= new JLabel("ENTER MASTER:");lmaster.setBounds(20, 300, 150, 50);add(lmaster);
-        lschedule = new JLabel("ENTER SCHEDULE:");lschedule.setBounds(20, 400, 150, 50); add(lschedule);
-        lprice = new JLabel("ENTER PRICE:");lprice.setBounds(420, 100, 150, 50);add(lprice);
-        ltour = new JLabel("WITH TOURS?"); ltour.setBounds(420, 200, 150, 50); add(ltour);
+        ImageIcon img = new ImageIcon("D:\\image3.jpg");
+        JLabel l6 = new JLabel("", img, JLabel.CENTER);
+        l6.setBounds(0, 0, 800, 600);
+        
+        ltitle = new JLabelStyle("TITLE:");ltitle.setBounds(20, 100, 150, 50);add(ltitle);
+        lage = new JLabelStyle("AGE:");lage.setBounds(20, 200, 150, 50);add(lage);
+        lmaster= new JLabelStyle("MASTER:");lmaster.setBounds(20, 300, 150, 50);add(lmaster);
+        lschedule = new JLabelStyle("SCHEDULE:");lschedule.setBounds(20, 400, 150, 50); add(lschedule);
+        lprice = new JLabelStyle("PRICE:");lprice.setBounds(420, 100, 150, 50);add(lprice);
+        ltour = new JLabelStyle("WITH TOURS?"); ltour.setBounds(420, 200, 150, 50); add(ltour);
 
 
-        ttitle = new JTextField(); ttitle.setBounds(220, 100, 150, 50);add(ttitle);
-        tage = new JTextField(); tage.setBounds(220, 200, 150, 50); add(tage);
-        tmaster = new JTextField(); tmaster.setBounds(220,300,150,50); add(tmaster);
+        ttitle = new JTextFieldS(); ttitle.setBounds(220, 100, 150, 50);add(ttitle);
+        tage = new JTextFieldS(); tage.setBounds(220, 200, 150, 50); add(tage);
+        tmaster = new JTextFieldS(); tmaster.setBounds(220,300,150,50); add(tmaster);
         tschedule = new JComboBox(); tschedule.setBounds(220, 400, 150, 50);
         tschedule.addItem("Monday"); tschedule.addItem("Tuesday"); tschedule.addItem("Wednesday");
         tschedule.addItem("Thursday"); tschedule.addItem("Friday");
         tschedule.addItem("Saturday"); add(tschedule);
-        tprice = new JTextField(); tprice.setBounds(620, 100, 150, 50); add(tprice);
+        tprice = new JTextFieldS(); tprice.setBounds(620, 100, 150, 50); add(tprice);
         gtour = new ButtonGroup();
         yes = new JRadioButton("YES");yes.setBounds(620, 200, 50, 30); add(yes); gtour.add(yes);
         no = new JRadioButton("NO"); no.setBounds(670, 200, 50, 30);add(no); gtour.add(no);
-
+        
+        
+        
         l2 = (ActionEvent e) ->{
             JComboBox box = (JComboBox)e.getSource();
             schedule = (String)tschedule.getSelectedItem();
         };
         tschedule.addActionListener(l2);
 
-        JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300, 480);add(cancel);
+        JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300, 460);add(cancel);
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
         });
-        JButton add = new ButtonStyle("ADD"); add.setLocation(300, 530); add(add);
+        JButton add = new ButtonStyle("ADD"); add.setLocation(300, 510); add(add);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +84,7 @@ class KidsAdd extends Container {
                 school.switchFrame(school.getAdmin(), school.getAdmin_add());
             }
         });
+        add(l6);
         setVisible(false);
         setLayout(null);
         setSize(800, 600);
