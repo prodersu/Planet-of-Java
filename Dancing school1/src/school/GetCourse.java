@@ -54,6 +54,7 @@ class GetCourse extends Container {
         JLabel l6 = new JLabel("", img, JLabel.CENTER);
         l6.setBounds(0, 0, 800, 600);               
         f.setLocation(500,200);
+        f.setOpacity(0.7f);//прозрачность
         f.setVisible(true);
         f.setLayout(null);
         f.setSize(800, 600);
