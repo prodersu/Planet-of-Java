@@ -1,12 +1,13 @@
 package school;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.sql.*;
 
 
-public class School extends JFrame {
+public class School extends JFrame implements Serializable {
     private ArrayList<Courses> courses = null;
     private ArrayList<String> Diary = null;    
     private MenuSignIn signIn = null;
@@ -71,9 +72,6 @@ public class School extends JFrame {
 
     }
 
-    School() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     
 
@@ -159,12 +157,21 @@ public class School extends JFrame {
     
     public void checkDiary() throws SQLException {
         ResultSet rs;
-        String diary = "YOU HAVE THESE COURSES : \n";
+        String diary1= "YOU HAVE THESE COURSES : \n";
+        String diary2 = "YOU DON'T HAVE ANY COURSE";
+        String diary = "";
         rs = stmt.executeQuery("select * from clients where login like '"+getLogin()+"'");
         while (rs.next()){
-            diary+=rs.getString("titles")+ " on " + rs.getString("schedule") + "\n Name : " + rs.getString("name");
+            if(rs.getString("titles").equals("")){
+                break;
+            }
+            else {
+                diary += rs.getString("titles") + " on " + rs.getString("schedule") + "\n Name : " + rs.getString("name");
+            }
         }
-        JOptionPane.showMessageDialog(School.this, diary);
+        diary1 = diary1+diary;
+        if(diary.equals("")) JOptionPane.showMessageDialog(School.this, diary2);
+        else JOptionPane.showMessageDialog(School.this, diary1);
     }
 
     

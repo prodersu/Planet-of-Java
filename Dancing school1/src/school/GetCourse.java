@@ -2,6 +2,7 @@
 package school;
 
 import java.awt.*;
+import java.awt.GraphicsDevice.WindowTranslucency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -54,11 +55,11 @@ class GetCourse extends Container {
         JLabel l6 = new JLabel("", img, JLabel.CENTER);
         l6.setBounds(0, 0, 800, 600);               
         f.setLocation(500,200);
-        f.setOpacity(0.7f);//прозрачность
         f.setVisible(true);
         f.setLayout(null);
         f.setSize(800, 600);
-        
+
+
         c.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

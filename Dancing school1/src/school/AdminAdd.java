@@ -1,6 +1,6 @@
 package school;
 
-import com.sun.xml.internal.ws.api.server.*;
+
 
 import javax.swing.*;
 import java.awt.*;

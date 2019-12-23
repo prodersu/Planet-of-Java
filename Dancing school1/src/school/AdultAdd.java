@@ -17,13 +17,13 @@ public class AdultAdd extends Container {
     private JLabel ltitle = null;       private JTextField ttitle = null;
     private JLabel lstyle = null;       private JComboBox<String> tstyle = null;
     private JLabel lmaster = null;      private JTextField tmaster = null;
-    private JLabel lschedule = null;    private JComboBox<String> tschedule = null;
+    private JLabel lschedule = null;    private JComboBox<String> tschedule = null; private JComboBox<String> tschedule1 = null; private JComboBox<String> tschedule2 = null;
     private JLabel lprice = null;       private JTextField tprice = null;
     private JLabel lgender = null;      private JComboBox<String> tgender = null;
     private JLabel lindiv = null;       private JComboBox<String> tindiv = null;
     private Courses c = null;
-    private String style = null;        private ActionListener l1;
-    private String schedule = null;     private ActionListener l2;
+    private String style = null;        private ActionListener l1; private ActionListener l11;private ActionListener l12;
+    private String schedule = null;     private ActionListener l2; private String schedule1 = ""; private String schedule2 = "";
     private String gender = null;       private ActionListener l3;
     private String indiv = null;        private ActionListener l4;
 
@@ -50,6 +50,14 @@ public class AdultAdd extends Container {
         tschedule.addItem("Monday"); tschedule.addItem("Tuesday"); tschedule.addItem("Wednesday");
         tschedule.addItem("Thursday"); tschedule.addItem("Friday"); 
         tschedule.addItem("Saturday"); add(tschedule);
+        tschedule1 = new JComboBox(); tschedule1.setBounds(420, 400, 150, 50);
+        tschedule1.addItem("");tschedule1.addItem("Monday"); tschedule1.addItem("Tuesday"); tschedule1.addItem("Wednesday");
+        tschedule1.addItem("Thursday"); tschedule1.addItem("Friday");
+        tschedule1.addItem("Saturday"); add(tschedule1);
+        tschedule2 = new JComboBox(); tschedule2.setBounds(620, 400, 150, 50);
+        tschedule2.addItem("");tschedule2.addItem("Monday"); tschedule2.addItem("Tuesday"); tschedule2.addItem("Wednesday");
+        tschedule2.addItem("Thursday"); tschedule2.addItem("Friday");
+        tschedule2.addItem("Saturday"); add(tschedule2);
         tprice = new JTextFieldS(); tprice.setBounds(620, 100, 150, 50); add(tprice);
         tgender = new JComboBox(); tgender.setBounds(620, 200, 150, 50); 
         tgender.addItem("Man"); tgender.addItem("Woman"); add(tgender);
@@ -67,6 +75,21 @@ public class AdultAdd extends Container {
             schedule = (String)tschedule.getSelectedItem();
         };
         tschedule.addActionListener(l2);
+        l11 = (ActionEvent e) ->{
+            JComboBox box = (JComboBox)e.getSource();
+            schedule1 = (String)tschedule1.getSelectedItem();
+        };
+        tschedule1.addActionListener(l2);
+        l12 = (ActionEvent e) ->{
+            JComboBox box = (JComboBox)e.getSource();
+            schedule2 = (String)tschedule2.getSelectedItem();
+        };
+        tschedule2.addActionListener(l2);
+        if(schedule1.contains("day")) {
+            schedule += ", " + schedule1;
+        }
+        if (schedule2.contains("day")){
+            schedule += ", " + schedule2;}
         l3 = (ActionEvent e) ->{
             JComboBox box = (JComboBox)e.getSource();
             gender = (String)tgender.getSelectedItem();
