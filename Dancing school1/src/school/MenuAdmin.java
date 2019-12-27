@@ -52,7 +52,6 @@ public class MenuAdmin extends Container {
         b4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                school.switchFrame(school.getIncome(), school.getAdmin());
                 school.getIncome().printIncome(school);
             }
         });

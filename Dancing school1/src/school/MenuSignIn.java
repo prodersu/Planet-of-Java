@@ -37,7 +37,7 @@ public class MenuSignIn extends Container {
         add(lf);
 
         pf = new JPasswordField();
-        pf.setEchoChar('#');
+        pf.setEchoChar('@');
         pf.setBounds(450, 200, 200, 50);
         add(pf);
 
@@ -58,7 +58,7 @@ public class MenuSignIn extends Container {
 
                 try {
                     ResultSet rs;
-                    String login = null;
+                    String login = "";
                     String pas = null;
                     rs = school.get_stmt().executeQuery("select * from admin where id>0");
                     while (rs.next()) {
@@ -71,6 +71,9 @@ public class MenuSignIn extends Container {
                         pf.setText("");
                         p = "";
                         school.switchFrame(school.getAdmin(), school.getSignIn());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(MenuSignIn.this, "Please, Enter the correct login or password");
                     }
                 } catch (SQLException e1) {
                     e1.printStackTrace();

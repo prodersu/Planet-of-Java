@@ -39,7 +39,7 @@ public class MenuSignInClient extends Container {
         add(lf);
 
         pf = new JPasswordField();
-        pf.setEchoChar('#');
+        pf.setEchoChar('@');
         pf.setBounds(450, 200, 200, 50);
         add(pf);
 
@@ -72,6 +72,9 @@ public class MenuSignInClient extends Container {
                         p = "";
                         school.switchFrame(school.getClient(), school.getSignInClient());
                         System.out.println("Client with " + school.getLogin()+" login is connected");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(MenuSignInClient.this, "Please, Enter the correct login or password");
                     }
                 } catch (SQLException e1) {
                     e1.printStackTrace();

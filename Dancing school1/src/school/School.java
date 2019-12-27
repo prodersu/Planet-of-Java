@@ -73,10 +73,10 @@ public class School extends JFrame implements Serializable {
     }
 
 
-    
 
 
-   
+
+
     public Connection get_con(){
         return con;
     }
@@ -181,9 +181,9 @@ public class School extends JFrame implements Serializable {
         x.setVisible(true);
     }
 
-    
 
-    
-    
-    
+
+
+
+
 }

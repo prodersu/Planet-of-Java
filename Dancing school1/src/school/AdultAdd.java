@@ -22,7 +22,7 @@ public class AdultAdd extends Container {
     private JLabel lgender = null;      private JComboBox<String> tgender = null;
     private JLabel lindiv = null;       private JComboBox<String> tindiv = null;
     private Courses c = null;
-    private String style = null;        private ActionListener l1; private ActionListener l11;private ActionListener l12;
+    private String style = null;        private ActionListener l1;
     private String schedule = null;     private ActionListener l2; private String schedule1 = ""; private String schedule2 = "";
     private String gender = null;       private ActionListener l3;
     private String indiv = null;        private ActionListener l4;
@@ -60,7 +60,7 @@ public class AdultAdd extends Container {
         tschedule2.addItem("Saturday"); add(tschedule2);
         tprice = new JTextFieldS(); tprice.setBounds(620, 100, 150, 50); add(tprice);
         tgender = new JComboBox(); tgender.setBounds(620, 200, 150, 50); 
-        tgender.addItem("Man"); tgender.addItem("Woman"); add(tgender);
+        tgender.addItem("all");tgender.addItem("Man"); tgender.addItem("Woman"); add(tgender);
         tindiv = new JComboBox(); tindiv.setBounds(620, 300, 150, 50);
         tindiv.addItem("Individual"); tindiv.addItem("Group");add(tindiv);
         
@@ -73,23 +73,13 @@ public class AdultAdd extends Container {
         l2 = (ActionEvent e) ->{
             JComboBox box = (JComboBox)e.getSource();
             schedule = (String)tschedule.getSelectedItem();
-        };
-        tschedule.addActionListener(l2);
-        l11 = (ActionEvent e) ->{
-            JComboBox box = (JComboBox)e.getSource();
             schedule1 = (String)tschedule1.getSelectedItem();
-        };
-        tschedule1.addActionListener(l2);
-        l12 = (ActionEvent e) ->{
-            JComboBox box = (JComboBox)e.getSource();
             schedule2 = (String)tschedule2.getSelectedItem();
         };
+        tschedule.addActionListener(l2);
+        tschedule1.addActionListener(l2);
         tschedule2.addActionListener(l2);
-        if(schedule1.contains("day")) {
-            schedule += ", " + schedule1;
-        }
-        if (schedule2.contains("day")){
-            schedule += ", " + schedule2;}
+
         l3 = (ActionEvent e) ->{
             JComboBox box = (JComboBox)e.getSource();
             gender = (String)tgender.getSelectedItem();
@@ -115,6 +105,9 @@ public class AdultAdd extends Container {
             String title = ttitle.getText();ttitle.setText("");
             String master = tmaster.getText(); tmaster.setText("");
             int price = Integer.parseInt(tprice.getText()); tprice.setText("");
+            schedule += " " + schedule1;
+            schedule += " " + schedule2;
+
             c = new Adult(title, master, schedule, price, 0, 1, style, gender, indiv);
             school.addCourse(c);
                 try {

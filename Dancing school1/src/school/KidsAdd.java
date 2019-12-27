@@ -17,7 +17,7 @@ class KidsAdd extends Container {
     private JLabel lprice = null;       private JTextField tprice = null;
     private JLabel ltour = null;        private JRadioButton yes = null;
     private ButtonGroup gtour = null;   private JRadioButton no = null;
-    private String schedule = null;     private ActionListener l2; private ActionListener l11;private ActionListener l12;
+    private String schedule = null;     private ActionListener l2;
     private Courses c = null;           private String schedule1 = ""; private String schedule2 = "";
 
     public KidsAdd(School school)
@@ -59,23 +59,12 @@ class KidsAdd extends Container {
         l2 = (ActionEvent e) ->{
             JComboBox box = (JComboBox)e.getSource();
             schedule = (String)tschedule.getSelectedItem();
-        };
-        tschedule.addActionListener(l2);
-        l11 = (ActionEvent e) ->{
-            JComboBox box = (JComboBox)e.getSource();
             schedule1 = (String)tschedule1.getSelectedItem();
-        };
-        tschedule1.addActionListener(l2);
-        l12 = (ActionEvent e) ->{
-            JComboBox box = (JComboBox)e.getSource();
             schedule2 = (String)tschedule2.getSelectedItem();
         };
+        tschedule.addActionListener(l2);
+        tschedule1.addActionListener(l2);
         tschedule2.addActionListener(l2);
-        if(schedule1.contains("day")) {
-            schedule += ", " + schedule1;
-        }
-        if (schedule2.contains("day")){
-            schedule += ", " + schedule2;}
 
         JButton cancel = new ButtonStyle("CANCEL"); cancel.setLocation(300, 460);add(cancel);
         cancel.addActionListener(new ActionListener() {
@@ -97,6 +86,7 @@ class KidsAdd extends Container {
                 else{tour_s = "no";}
                 int price = Integer.parseInt(tprice.getText()); tprice.setText("");
                 int age = Integer.parseInt(tage.getText()); tage.setText("");
+                schedule+=" "+ schedule1 +" "+schedule2;
                 c = new Kids(title, master, schedule, price, 0, 1, age, tour);
                 school.addCourse(c);
                 try {
