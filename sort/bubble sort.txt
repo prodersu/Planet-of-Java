@@ -1,0 +1,40 @@
+package com.company;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    int a[] = new int[60005];
+        int len, n1 = 0;
+        long count = 0;
+        boolean isswap = true;
+        Random r = new Random();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input the len: ");
+        len = sc.nextInt();
+        System.out.print("Input the element of array: \n");
+        for (int i = 0; i<len; i++){
+            a[i] = r.nextInt(1000);
+        }
+        long start = System.currentTimeMillis();
+
+        while(isswap){
+            isswap = false;
+            for (int i = 0; i < len - n1 - 1; i++, count++) {
+                if(a[i]>a[i+1]){
+                    int t = a[i];
+                    a[i] = a[i+1];
+                    a[i+1] = t;
+                    isswap = true;
+                }
+            }
+            n1++;
+        }
+        System.out.println();
+        long end = System.currentTimeMillis();
+
+        System.out.println("\nCount: " + count);
+        System.out.println("Time: " + (end -start)/1000 + " seconds");
+    }
+}
