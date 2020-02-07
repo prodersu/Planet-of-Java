@@ -1,11 +1,29 @@
-package com.company;
+package shellsort.src.com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Merge {
-    static void merge(int arr[], int l, int m, int r)
+    
+    public Merge(Main main) throws FileNotFoundException{
+        int [] arr = new int[360005];
+        int i = 0;
+        File f = new File(Integer.toString(main.getLen())+".txt");
+        Scanner sc = new Scanner(f);
+        while(sc.hasNext()){
+            arr[i++] = Integer.parseInt(sc.next());
+        }
+        sc.close();
+        int len = i;
+        long start = System.currentTimeMillis();
+        sort(arr, 0, len-1);
+        long end = System.currentTimeMillis();
+        long time = (end - start)/1000;
+        float time1 = (end - start)%1000;
+        main.printTime("Merge", time, time1);
+    }
+    void merge(int arr[], int l, int m, int r)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -63,7 +81,7 @@ public class Merge {
 
     // Main function that sorts arr[l..r] using
     // merge()
-    static void sort(int arr[], int l, int r)
+    void sort(int arr[], int l, int r)
     {
         if (l < r)
         {
@@ -78,23 +96,6 @@ public class Merge {
             merge(arr, l, m, r);
         }
     }
-    public static void main(String args[]) throws FileNotFoundException {
-        int [] arr = new int[360005];
-        int i = 0;
-        File f = new File("array.txt");
-        Scanner sc = new Scanner(f);
-        while(sc.hasNext()){
-            arr[i++] = Integer.parseInt(sc.next());
-        }
-        sc.close();
-        int len = i;
-        long start = System.currentTimeMillis();
-        sort(arr, 0, len-1);
-        long end = System.currentTimeMillis();
-        long time = (end - start)/1000;
-        float time1 = (end - start)%1000;
-        System.out.println("Merge sort performed this task for: ");
-        System.out.println("time: " + time +  " seconds " + time1 + " milliseconds");
-
-    }
+    
 }
+
