@@ -12,21 +12,19 @@ public class Task2_1 {
 
     public static void main(String args[]) throws FileNotFoundException {
         System.out.println("Input the size: ");
-        int[] arr = new int[360005];
-        int[] arr2 = new int[360005];
-        int[] arr3 = new int[360005];
-        int[] arr4 = new int[360005];
-        int[] arr5 = new int[360005];
+        
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        int[] arr = new int[n];        
         Random r = new Random();
         for (int i = 0; i < n; i++){ 
-            arr[i] = r.nextInt(1000);
-            arr2[i] = arr[i];
-            arr3[i] = arr[i];
-            arr4[i] = arr[i];
-            arr5[i] = arr[i];
+            arr[i] = r.nextInt(1000);            
         }
+        int[] arr2 = Arrays.copyOf(arr, n);
+        int[] arr3 = Arrays.copyOf(arr, n);
+        int[] arr4 = Arrays.copyOf(arr, n);
+        int[] arr5 = Arrays.copyOf(arr, n);
+        
         int[] c_rate = new int[5];
         while(true){
         System.out.println("Sort array with: ");
@@ -139,7 +137,7 @@ static int getMax(int arr[], int n)
         while (swap) {
             swap = false;
             for (int i = 0; i < len - i - 1; i++, c++) {
-                if (arr[i] > arr[i + 1]) {
+                if (arr[i] > arr[i + 1]) {                    
                     int temp = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = temp;
