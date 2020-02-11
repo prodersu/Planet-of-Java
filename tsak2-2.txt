@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package javaapplication1;
+package com.company;
+
 
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author 28354
  */
-public class JavaApplication1 {
+public class Main {
 
     /**
      * @param args the command line arguments
@@ -22,64 +19,66 @@ public class JavaApplication1 {
         System.out.println("Input the size: ");
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        char [] arr = new char[n];
-        
+        String [] arr = new String[n];
+        String symbols = "abcdefghijklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM";
+        Random r = new Random();
         for(int i = 0; i<n; i++){
-            String f = Integer.toOctalString(rnd(141,172));
-            arr[i] = (char)Integer.parseInt(f, 8);
+            String random = new Random().ints(3, 0, symbols.length())
+                    .mapToObj(symbols::charAt)
+                    .map(Object::toString)
+                    .collect(Collectors.joining());
+            arr[i] = random;
         }
-            
+        System.out.println();
         System.out.println(Arrays.toString(arr));
+        radixsort(arr, n);
     }
     //radix sort
-static int getMax(int arr[], int n)
+    static String getMax(String arr[], int n)
     {
-        int mx = arr[0];
-        for (int i = 1; i < n; i++)
-            if (arr[i] > mx)
+        String mx = arr[0];
+        for (int i = 0; i < n; i++) {
+            if(arr[i].length()>mx.length())
                 mx = arr[i];
+        }
         return mx;
     }
 
-    static void countSort(int arr[], int n, int exp)
+    static void countSort(String arr[], int n, int let)
     {
-        int output[] = new int[n]; // output array
-        int i;
-        int count[] = new int[10];
-        Arrays.fill(count, 0);
+        char[] c = new char[n];
+        for (int i = 0; i < n ; i++) {
+            c[i] = arr[i].charAt(let);
+        }
+        int f = 0;
+        int[] dep = new int[200];
+        Arrays.fill(dep, 0);
+        for (int i = 0; i < n; i++)
+            dep[c[i]] += 1;
+        for (int i = 0; i < 200; i++) {
+            if (dep[i] > 0)
+                for (int j = 0; j < dep[i]; j++)
+                    for (int x = 0; x < n; x++) {
+                        c[f] = (char) i;
+                        if(arr[x].charAt(let)==c[f])
 
 
-        for (i = 0; i < n; i++)
-            count[ (arr[i]/exp)%10 ]++;
 
-        for (i = 1; i < 10; i++)
-            count[i] += count[i - 1];
-
-        // Build the output array
-        for (i = n - 1; i >= 0; i--)
-        {
-            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i];
-            count[ (arr[i]/exp)%10 ]--;
+            }
+            else continue;
         }
 
-        for (i = 0; i < n; i++)
-            arr[i] = output[i];
+
     }
 
     // Radix Sort
-    static void radixsort(int arr[], int n) {
+    static void radixsort(String arr[], int n) {
         // Find the maximum number to know number of digits
-        int m = getMax(arr, n);
+        String m = getMax(arr, n);
 
-        for (int exp = 1; m / exp > 0; exp *= 10)
-            countSort(arr, n, exp);
+        countSort(arr, n, 0);
+        System.out.println(Arrays.toString(arr));
     }
-    
-    
-    public static int rnd(int min, int max)
-    {
-	max -= min;
-	return (int) (Math.random() * ++max) + min;
-    }
+
+
 }
-
