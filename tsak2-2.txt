@@ -1,6 +1,8 @@
-package com.company;
+package taskmaster;
 
 
+
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -10,27 +12,30 @@ import java.util.stream.Collectors;
  *
  * @author 28354
  */
-public class Main {
+public class task2_2 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Input the size: ");
+        System.out.println("Input the size of array: ");
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         String [] arr = new String[n];
         String symbols = "abcdefghijklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM";
         Random r = new Random();
+        System.out.println("Input the length of each string element: ");
+        int len = sc.nextInt();
         for(int i = 0; i<n; i++){
-            String random = new Random().ints(3, 0, symbols.length())
+            String random = new Random().ints(len, 0, symbols.length())
                     .mapToObj(symbols::charAt)
                     .map(Object::toString)
                     .collect(Collectors.joining());
             arr[i] = random;
         }
-        System.out.println();
+        System.out.println("Random string array before sorting: ");
         System.out.println(Arrays.toString(arr));
+        System.out.println("String array after sorting: ");
         radixsort(arr, n);
     }
     //radix sort
@@ -44,41 +49,40 @@ public class Main {
         return mx;
     }
 
-    static void countSort(String arr[], int n, int let)
+    static void countSort(String arr[], int n, int letter)
     {
-        char[] c = new char[n];
+        int[] c = new int[n];
+        String[] arr2 = new String[n];
         for (int i = 0; i < n ; i++) {
-            c[i] = arr[i].charAt(let);
+            c[i] = arr[i].charAt(letter);
+            arr2[i] = arr[i];
         }
         int f = 0;
-        int[] dep = new int[200];
+        int[] dep = new int[201];
         Arrays.fill(dep, 0);
         for (int i = 0; i < n; i++)
             dep[c[i]] += 1;
-        for (int i = 0; i < 200; i++) {
-            if (dep[i] > 0)
-                for (int j = 0; j < dep[i]; j++)
-                    for (int x = 0; x < n; x++) {
-                        c[f] = (char) i;
-                        if(arr[x].charAt(let)==c[f])
-
-
-
-            }
-            else continue;
-        }
-
+        for(int i = 0; i < 201; i++)
+            if(dep[i]>0)
+                    for (int k = 0; k < n; k++)
+                        if(c[k]==i){
+                            arr[f++] = arr2[k];
+                        }
+                        else continue;
 
     }
 
     // Radix Sort
     static void radixsort(String arr[], int n) {
-        // Find the maximum number to know number of digits
         String m = getMax(arr, n);
 
-        countSort(arr, n, 0);
+        for (int i = m.length()-1; i >=0 ; i--)
+            countSort(arr, n, i);
+
+
         System.out.println(Arrays.toString(arr));
     }
 
 
 }
+
