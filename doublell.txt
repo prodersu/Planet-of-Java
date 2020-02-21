@@ -72,7 +72,66 @@ public class DoubleLinkedList<E> {
         }
         size--;
     }
-
+    public int size(){
+        return size;
+    }
+    public void remove(int index){
+        Node<E> last = head;
+        if(index==0)
+            remove(true);
+        else if(index==this.size()){
+            while(last.getNext().getNext()!=null)
+                last = last.getNext();
+            last.setNext(null);
+        }
+        else{
+            int i = 0;
+            while(i!=index-1){
+                last = last.getNext();
+                i++;
+            }
+            last.setNext(last.getNext().getNext());
+        }
+        size--;
+    }
+    
+    public void set(int index, E e){
+        int i = 0;
+        Node<E> last = head;
+        Node<E> next;
+        if(index==0) {
+            next = last.getNext();
+            head = new Node<E>(e);
+            head.setNext(next);
+        }
+        else{
+            while(i!=index-1){
+                i++;
+                last = last.getNext();
+            }
+            next = last.getNext().getNext();
+            last.setNext(new Node<E>(e));
+            last.getNext().setNext(next);
+        }
+    }
+    
+    public void print(boolean ishead){
+        Node<E> last = head;
+        if(ishead){
+            int i = 0;
+            while(get(i)!=null){
+                System.out.println(get(i));
+                i++;
+            }           
+        }
+        else{
+            int i = size-1;
+            while(i>=0){
+                System.out.println(get(i));
+                i--;
+            }
+        }
+    }
     public String toString(){
         String all = "";
 
