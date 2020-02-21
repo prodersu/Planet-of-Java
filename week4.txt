@@ -1,4 +1,4 @@
-package lesson;
+package week4;
 
 class Node<T>{
     private Node<T> next = null;
@@ -19,6 +19,8 @@ class Node<T>{
     public void setNext(Node<T> next) {
         this.next = next;
     }
+
+
 }
 
 public class LinkedList<T> {
@@ -67,7 +69,7 @@ public class LinkedList<T> {
 
         size++;
     }
- 
+
     public String toString(){
         String all = "";
 
@@ -76,11 +78,11 @@ public class LinkedList<T> {
             all += (cur.getData().toString() + "\n");
             cur = cur.getNext();
         }
-        
+
         return all;
     }
-    
-    
+
+
     public T getFirst(){
         return head.getData();
     }
@@ -98,8 +100,8 @@ public class LinkedList<T> {
             index++;
         }
         return index;
-    }   
-    
+    }
+
     public void print()
     {
         Node<T> last = head;
@@ -108,23 +110,98 @@ public class LinkedList<T> {
             last = last.getNext();
         }
     }
-    
+
     public int size(){
         return size;
     }
-    
+
     public void set(int index, T element){
         int i = 0;
         Node<T> last = head;
-        if(index==0)
-            this.head = new Node<T>(element);
+        Node<T> next;
+        if(index==0) {
+            next = last.getNext();
+            head = new Node<T>(element);
+            head.setNext(next);
+        }
         else{
             while(i!=index-1){
                 i++;
                 last = last.getNext();
             }
+            next = last.getNext().getNext();
             last.setNext(new Node<T>(element));
+            last.getNext().setNext(next);
         }
     }
-        
+
+    public void clear(){
+        Node<T> last = head;
+        while(last.getNext()!=null){
+            remove(last.getData());
+            last = last.getNext();
+        }
+        head = null;
+    }
+
+    public void remove(){
+        head = head.getNext();
+    }
+
+    public void remove(int index){
+        if(index==0)
+            remove();
+        else{
+            Node<T> last = head;
+            int i = 0;
+            while(i!=index-1)
+                last = last.getNext();
+            last.setNext(last.getNext().getNext());
+        }
+    }
+
+    public void add(int index, T element){
+        Node<T> last = head;
+        Node<T> mid = new Node<T>(element);
+        int i = 0;
+        if(index==this.size+1){
+            add(element);
+        }
+        else if(index==0){
+            mid.setNext(head);
+            head = mid;
+        }
+        else{
+            while(i!=index-1) {
+                last = last.getNext();
+                i++;
+            }
+            mid.setNext(last.getNext());
+            last.setNext(mid);
+        }
+    }
+    public void addFirst(T e){
+        add(0, e);
+    }
+
+    public LinkedList clone(){
+        LinkedList copy = new LinkedList();
+        int i = 0;
+        while(i!=size) {
+            copy.add(i, get(i));
+            i++;
+        }
+        return copy;
+    }
+
+    public void addAll(LinkedList<T> list2){
+        int i = 0;
+        while(i!=list2.size()+1){
+            add(list2.get(i));
+            i++;
+        }
+    }
+
+
+
 }
