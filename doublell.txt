@@ -1,0 +1,87 @@
+package week4;
+
+public class DoubleLinkedList<E> {
+    private Node<E> head = null;
+    private int size = 0;
+
+
+    public void add(E e, boolean ishead){
+        Node<E> last = head;
+        Node<E> mid = new Node<>(e);
+        if(ishead){
+            mid.setNext(head);
+            head = mid;
+        }
+        else{
+            while(last.getNext() != null){
+                last = last.getNext();
+            }
+            last.setNext(new Node<E>(e));
+        }
+        size++;
+    }
+
+    public void add(int index, E e){
+        if(index==0)
+            add(e, true);
+        else{
+            Node<E> last = head;
+            Node<E> mid = new Node<>(e);
+            int i = 0;
+            while(i!= index-1){
+                last = last.getNext();
+                i++;
+            }
+            mid.setNext(last.getNext());
+            last.setNext(mid);
+        }
+        size++;
+    }
+
+    public E get(int index){
+        int i = 0;
+        Node<E> last = head;
+        while(i!=index) {
+            last = last.getNext();
+            i++;
+        }
+        return last.getData();
+
+    }
+
+    public E getFirst(){
+        return get(0);
+    }
+
+    public E getLast(){
+        Node<E> last = head;
+        while (last.getNext()!= null)
+            last = last.getNext();
+        return last.getData();
+    }
+
+    public void remove(boolean ishead){
+        if(ishead){
+            head = head.getNext();
+        }
+        else{
+            Node<E> last = head;
+            while(last.getNext().getNext()!= null)
+                last = last.getNext();
+            last.setNext(null);
+        }
+        size--;
+    }
+
+    public String toString(){
+        String all = "";
+
+        Node<E> cur = head;
+        while(cur != null){
+            all += (cur.getData().toString() + "\n");
+            cur = cur.getNext();
+        }
+
+        return all;
+    }
+}
