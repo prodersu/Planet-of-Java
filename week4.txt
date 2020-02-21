@@ -1,0 +1,130 @@
+package lesson;
+
+class Node<T>{
+    private Node<T> next = null;
+    private T data;
+
+    public Node(T data){
+        this.data = data;
+    }
+
+    public T getData(){
+        return data;
+    }
+
+    public Node<T> getNext() {
+        return next;
+    }
+
+    public void setNext(Node<T> next) {
+        this.next = next;
+    }
+}
+
+public class LinkedList<T> {
+    private Node<T> head = null;
+    private int size = 0;
+
+    public void remove(T data){
+        Node<T> cur = head;
+
+        if(head.getData().equals(data)){
+            head = head.getNext();
+        }
+        else{
+            while(cur.getNext() != null){
+                if(cur.getNext().getData().equals(data)){
+                    cur.setNext(cur.getNext().getNext());
+                    break;
+                }
+                cur = cur.getNext();
+            }
+        }
+
+        size--;
+    }
+    public T get(int index){
+        int i = 0;
+        Node<T> cur = head;
+        while(i!=index){
+            i++;
+            cur = cur.getNext();
+        }
+        return cur.getData();
+    }
+    public void add(T data){
+        if(head == null){
+            head = new Node<T>(data);
+        }
+        else{
+            Node<T> last = head;
+
+            while(last.getNext() != null){
+                last = last.getNext();
+            }
+            last.setNext(new Node<T>(data));
+        }
+
+        size++;
+    }
+ 
+    public String toString(){
+        String all = "";
+
+        Node<T> cur = head;
+        while(cur != null){
+            all += (cur.getData().toString() + "\n");
+            cur = cur.getNext();
+        }
+        
+        return all;
+    }
+    
+    
+    public T getFirst(){
+        return head.getData();
+    }
+    public T getLast(){
+        Node<T> last = head;
+        while(last.getNext()!=null)
+            last = last.getNext();
+        return last.getData();
+    }
+    public int indexOf(Object o){
+        int index = 0;
+        Node<T> last = head;
+        while(last.getData()!= o){
+            last = last.getNext();
+            index++;
+        }
+        return index;
+    }   
+    
+    public void print()
+    {
+        Node<T> last = head;
+        while(last!=null){
+            System.out.println(last.getData());
+            last = last.getNext();
+        }
+    }
+    
+    public int size(){
+        return size;
+    }
+    
+    public void set(int index, T element){
+        int i = 0;
+        Node<T> last = head;
+        if(index==0)
+            this.head = new Node<T>(element);
+        else{
+            while(i!=index-1){
+                i++;
+                last = last.getNext();
+            }
+            last.setNext(new Node<T>(element));
+        }
+    }
+        
+}
