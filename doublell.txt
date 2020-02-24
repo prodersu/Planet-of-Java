@@ -18,12 +18,16 @@ public class DoubleLinkedList<E> {
             }
             last.setNext(new Node<E>(e));
         }
+        
+        
         size++;
     }
 
     public void add(int index, E e){
-        if(index==0)
+        if(index==0){
             add(e, true);
+            size--;
+        }
         else{
             Node<E> last = head;
             Node<E> mid = new Node<>(e);
@@ -34,7 +38,9 @@ public class DoubleLinkedList<E> {
             }
             mid.setNext(last.getNext());
             last.setNext(mid);
+            
         }
+        
         size++;
     }
 
@@ -77,8 +83,10 @@ public class DoubleLinkedList<E> {
     }
     public void remove(int index){
         Node<E> last = head;
-        if(index==0)
+        if(index==0){
+            size++;     
             remove(true);
+        }
         else if(index==this.size()){
             while(last.getNext().getNext()!=null)
                 last = last.getNext();
@@ -116,17 +124,16 @@ public class DoubleLinkedList<E> {
     }
     
     public void print(boolean ishead){
-        Node<E> last = head;
+        int i = 0;
         if(ishead){
-            int i = 0;
-            while(get(i)!=null){
+            while(i!=size){
                 System.out.println(get(i));
                 i++;
-            }           
+            }
         }
         else{
-            int i = size-1;
-            while(i>=0){
+            i = size-1;
+            while(i!=-1){
                 System.out.println(get(i));
                 i--;
             }
