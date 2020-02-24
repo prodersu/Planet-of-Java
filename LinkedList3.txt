@@ -1,0 +1,137 @@
+package week4;
+
+public class LinkedList3 <E extends Comparable<E>> {
+    private Node<E> head = null;
+    private int size = 0;
+    public void addSorted(E obj){
+        Node<E> last = head;
+        for(int i = 0; i<size; i++){
+            for(int j = 0; j<size-i-1; j++){
+                if(get(j).compareTo(get(j+1))==1){
+                    E temp = get(j);
+                    set(j, get(j+1));
+                    set(j+1, temp);
+                }
+                }
+            }
+        for(int i = 0; i<size; i++){
+            if(get(i).compareTo(obj)==1){
+                add(i, obj);
+                break;
+            }
+            else if(i==size-1){
+                add(i+1, obj);
+                break;
+            }
+                
+        }
+    }
+    public void add(E e, boolean ishead){
+        Node<E> last = head;
+        Node<E> mid = new Node<>(e);
+        if(ishead){
+            mid.setNext(head);
+            head = mid;
+        }
+        else{
+            while(last.getNext() != null){
+                last = last.getNext();
+            }
+            last.setNext(new Node<E>(e));
+        }
+        
+        
+        size++;
+    }
+    
+    public void add(int index, E e){
+        if(index==0){
+            add(e, true);
+            size--;
+        }
+        else{
+            Node<E> last = head;
+            Node<E> mid = new Node<>(e);
+            int i = 0;
+            while(i!= index-1){
+                last = last.getNext();
+                i++;
+            }
+            mid.setNext(last.getNext());
+            last.setNext(mid);
+            
+        }
+        
+        size++;
+    }
+    public void set(int index, E e){
+        int i = 0;
+        Node<E> last = head;
+        Node<E> next;
+        if(index==0) {
+            next = last.getNext();
+            head = new Node<E>(e);
+            head.setNext(next);
+        }
+        else{
+            while(i!=index-1){
+                i++;
+                last = last.getNext();
+            }
+            next = last.getNext().getNext();
+            last.setNext(new Node<E>(e));
+            last.getNext().setNext(next);
+        }
+    }
+
+    public E get(int index){
+        int i = 0;
+        Node<E> last = head;
+        while(i!=index) {
+            last = last.getNext();
+            i++;
+        }
+        return last.getData();
+
+    }
+    public void remove(int index){
+        Node<E> last = head;        
+        if(index==0)
+            head = head.getNext();
+        else if(index==size-1){
+            while(last.getNext().getNext()!=null)
+                last = last.getNext();
+            last.setNext(null);
+        }
+        else{
+            int i = 0;
+            while(i!=index-1){
+                last = last.getNext();
+                i++;
+            }
+            last.setNext(last.getNext().getNext());
+        }
+        size--;
+    }
+    public String toString(){
+        String all = "";
+
+        Node<E> cur = head;
+        while(cur != null){
+            all += (cur.getData().toString() + "\n");
+            cur = cur.getNext();
+        }
+
+        return all;
+    }
+    
+    public void print()
+    {
+        Node<E> last = head;
+        while(last!=null){
+            System.out.println(last.getData());
+            last = last.getNext();
+        }
+        System.out.println();
+    }
+}
