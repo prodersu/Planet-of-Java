@@ -1,0 +1,46 @@
+package week5;
+
+public class ArrayDeque {
+private E arr[];
+private int size = 0, n = 0;
+private E head = null;
+private E tail = null;
+
+public ArrayDeque(int len){
+arr = (E[]) new Comparable[len];
+this.size = len;
+}
+public ArrayDeque(){
+this(16);
+}
+public int size(){
+return n;
+}
+public boolean isEmpty(){
+if(n==0)
+return true;
+else
+return false;
+}
+public E first(){
+return head;
+}
+
+public E last(){
+return tail;
+}
+
+public void doubleCapacity(){
+E arr2[] = (E[])new Comparable[size*2];
+for(int i=0; i arr2[i] = arr[i];
+
+arr = arr2;
+this.size *= 2;
+}
+
+public void addFirst(E e){
+head = e;
+}
+
+
+}
