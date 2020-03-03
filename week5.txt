@@ -1,46 +1,113 @@
-package week5;
+package folder;
 
-public class ArrayDeque {
-private E arr[];
-private int size = 0, n = 0;
-private E head = null;
-private E tail = null;
+public class ArrayDeque <E>{
+    private E arr[];
+    private int size = 0, size_e = 0;
+    private int head = -1;
+    private int tail = -1;
 
-public ArrayDeque(int len){
-arr = (E[]) new Comparable[len];
-this.size = len;
-}
-public ArrayDeque(){
-this(16);
-}
-public int size(){
-return n;
-}
-public boolean isEmpty(){
-if(n==0)
-return true;
-else
-return false;
-}
-public E first(){
-return head;
-}
+    public ArrayDeque(int len){
+        arr = (E[]) new Object[len];
+        this.size = len;
+    }
+    public ArrayDeque(){
+        this(16);
+    }
+    public boolean isEmpty(){
+        if(size_e==0)
+            return true;
+        else 
+            return false;
+    }
+    public E first(){
+        return arr[head];
+    }
+    public E last(){ return arr[tail];}
+    public int size(){
+        return size_e;
+    }
+    public void doubleCapacity(){
+        E arr2[] = (E[]) new Object[size*2];
+        int i = head;
+        int j = 0;
+        if(head<tail)
+            for(; j<tail+1; j++,i++)
+                arr2[j] = arr[i];
+        else{
+            while(i<size)
+                arr2[j++] = arr[i++];
+            i = 0;
+            while(i<=tail)
+                arr2[j++] = arr[i++];
+        }    
+        head = 0;
+        tail = size_e - 1;
+        arr = arr2;
+        this.size *= 2;
+    }
+    public void addFirst(E e){
+        if(size_e==size)//is Full
+            doubleCapacity();
+        else if(isEmpty())
+        {
+            head = 0;
+            tail = 0;
+        }
+        if(head==0)
+            head = size-1;        
+        else
+            head--;
+        arr[head] = e;
+        size_e++;        
+    }
+    public void addLast(E e){
+        if(size_e==size){//is Full
+            doubleCapacity();
+            tail = (tail+1)%size;
+        }
+        else if(isEmpty())
+        {
+            head = 0;
+            tail = 0;
+        }
+        else
+            tail = (tail+1)%size;
+        arr[tail] = e;
+        size_e++;
+    }
+    public E removeFirst(){
+        E rem = arr[head];
+        arr[head] = null;
+        head = (head+1)%size;
+        size_e--;
+        return rem;
+    }
+    public E removeLast(){
+        E rem = arr[tail];
+        arr[tail] = null;
+        if(tail==0)
+            tail = size-1;
+        else
+            tail--;
+        size_e--;
+        return rem;
+    }
 
-public E last(){
-return tail;
-}
-
-public void doubleCapacity(){
-E arr2[] = (E[])new Comparable[size*2];
-for(int i=0; i arr2[i] = arr[i];
-
-arr = arr2;
-this.size *= 2;
-}
-
-public void addFirst(E e){
-head = e;
-}
-
-
+    @Override
+    public String toString() {
+        String a = "";
+        for(int i = 0; i<size; i++){
+            if(i==head)
+                a+="h";
+            if(i==tail)
+                a+="t";
+            if(arr[i] == null)
+                a+= "n ";
+            else
+                a+= arr[i].toString() + " ";
+           
+        }
+        return a;
+    }
+    
 }
