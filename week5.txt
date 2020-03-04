@@ -111,3 +111,100 @@ public class ArrayDeque <E>{
     }
     
 }
+//PriorityQueue
+package com.company;
+
+public class PriorityQueue <E extends Comparable> {
+private E arr[];
+private int high = 0, low = 0;
+private int size = 0, size_e = 0;
+
+    public PriorityQueue(int len){
+        arr = (E[]) new Comparable[len];
+        this.size = len;
+    }
+    public void insert(E e){
+        if(size_e==size)
+            System.out.println("The queue is full");
+        else if(isEmpty()){
+            arr[high] = e;
+            size_e++;
+        }
+        else {
+            if (e.compareTo(arr[high]) == 1) {
+                if (high == 0)
+                    high = size - 1;
+                else
+                    high--;
+                arr[high] = e;
+            }
+            else{
+                int i;
+                for(i = low; e.compareTo(arr[i])>0; i--){
+                    arr[(i+1)%size] = arr[i];
+                    if(i==0)
+                        i = size;
+                }
+                arr[(i+1)%size] = e;
+                low = (low+1)%size;
+            }
+            size_e++;
+        }
+    }
+    public E remove(){
+        E rem = arr[high];
+        arr[high] = null;
+        high = (high+1)%size;
+        return rem;
+    }
+    public E peek(){
+        return arr[high];
+    }
+    public boolean isEmpty(){
+        if(size_e==0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public String toString() {
+        String pq = "";
+        for (int i = 0; i<size; i++){
+            if(i==high)
+                pq += "H";
+            if(i==low)
+                pq +="L";
+            if(arr[i]==null)
+                pq +="[] ";
+            else
+                pq += arr[i].toString() + " ";
+        }
+        return pq;
+    }
+}
+//Person
+public class Person  implements Comparable <Person>{
+    private String name = null;
+    private int age = 0;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(age);
+    }
+
+
+    @Override
+    public int compareTo(Person o) {
+        if(this.age>o.age)
+            return 1;
+        else
+            return 0;
+    }
+}
+
