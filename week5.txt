@@ -155,6 +155,7 @@ private int size = 0, size_e = 0;
         E rem = arr[high];
         arr[high] = null;
         high = (high+1)%size;
+        size_e--;
         return rem;
     }
     public E peek(){
