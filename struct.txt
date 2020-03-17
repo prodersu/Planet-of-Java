@@ -1,0 +1,165 @@
+// Example program
+#include <iostream>
+#include <string>
+using namespace std;
+struct Player{
+    string name;
+    string surname;
+    string amplua;
+    int games;
+    int goals;
+};
+    
+int main()
+{
+    int n;
+    cin>>n;
+    Player* players = new Player[n];
+    for(int i = 0; i<n; i++)
+        cin>>players[i].name>>players[i].surname>>players[i].amplua>>players[i].games>>players[i].goals;
+    cout<<"The best striker is: ";
+    int max=0, maxi;
+    for(int i = 0; i<n; i++)
+        if(players[i].games>max){
+            max = players[i].games;
+            maxi = i;
+        }
+    cout<<players[maxi].name<<" "<<players[maxi].surname<<" "<<players[maxi].amplua<<" "<<players[maxi].games<<" "<<players[maxi].goals<<endl;
+    cout<<"Players, that have less than 5 games: "<<endl;
+    for(int i = 0; i<n; i++)
+        if(players[i].games<5)
+            cout<<players[i].name<<" "<<players[i].surname<<" "<<players[i].amplua<<" "<<players[i].games<<" "<<players[i].goals<<endl;
+}
+
+// таск2
+#include <iostream>
+#include <string>
+using namespace std;
+struct Train{
+    int id;
+    string city;
+    string time;
+    int dep;
+};
+void upperCase(string stName) {////Pass by reference
+	for (int i = 0; i < stName.length(); i++) {
+		stName[i] = toupper(stName[i]);
+	}
+}  
+int str_int(string num){
+    int res = 0;
+    num = (int)(num[0] - 48)*1000 + (int)(num[1]-48)*100  + (int)(num[2]-48)*10 + int(num[3] - 48);
+    return res;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    Train* tr = new Train[n];
+    for(int i = 0; i<n; i++){
+        cin>>tr[i].id>>tr[i].city>>tr[i].time;
+        upperCase(tr[i].city);
+        tr[i].dep = str_int(tr[i].time);
+    }
+    string cty;
+    cin>>cty;
+    upperCase(cty);
+    int min = 11111, mini;
+    for(int i = 0; i<n; i++)
+        if(tr[i].city==cty and tr[i].dep<min){
+            mini = i;
+            min = tr[i].dep;
+        }
+    cout<<endl<<tr[mini].id<<"_"<<tr[mini].city<<"_"<<tr[mini].time<<endl;
+}
+
+
+//task3
+#include <iostream>
+#include <string>
+using namespace std;
+struct Item{
+   string name;
+   int count;
+   int price;
+   string producer;
+   string date;
+};
+
+int main()
+{
+    int n;
+    cin>>n;
+    Item* items = new Item[n];
+    int sum = 0;
+    for(int i = 0; i<n;i++){
+        cin>>items[i].name>>items[i].count>>items[i].price>>items[i].producer>>items[i].date;
+        sum += items[i].price;
+    }
+    double aver = sum/n;
+    for(int i = 0; i<n;i++)
+        if(items[i].price>aver)
+            cout<<items[i].name<<items[i].count<<items[i].price<<items[i].producer<<items[i].date<<endl;
+            
+    
+}
+
+
+
+// task4
+#include <iostream>
+#include <string>
+using namespace std;
+struct Worker{
+   string surname;
+   int age;
+   string edu;
+   string pos;
+};
+
+int main()
+{
+    int n;
+    cin>>n;
+    Worker* ws = new Worker[n];
+    int count = 0;
+    for(int i = 0; i<n;i++){
+        cin>>ws[i].surname>>ws[i].age>>ws[i].edu>>ws[i].pos;
+        if(ws[i].pos == "engineer")
+            count++;
+    for(int i = 0; i<n;i++)
+        if(ws[i].age>30 and ws[i].edu!="high")
+            cout<<ws[i].surname<<ws[i].age<<ws[i].edu<<ws[i].pos<<endl;
+    cout<<"Count of engineers: "<<count<<endl;
+    for(int i = 0; i<n;i++)
+        if(ws[i].pos=="engineer")
+            cout<<ws[i].surname<<ws[i].age<<ws[i].edu<<ws[i].pos<<endl;
+            
+    
+}
+
+
+//task6
+#include <iostream>
+#include <string>
+using namespace std;
+struct Movie{
+    string name;
+    string date;
+    string time;
+    string len;
+    string genre;
+    int budget;
+};
+    
+int main()
+{
+    int n;
+    cin>>n;
+    Movie* ms = new Movie[n];
+    for(int i = 0; i<n; i++)
+        cin>>ms[i].name>>ms[i].date>>ms[i].time>>ms[i].len>>ms[i].genre>>ms[i].budget;
+    for(int i = 0; i<n; i++)
+        if(((int)(ms[i].time[0]-48)*10 + (int)(ms[i].time[1]-48))>=18 and (int)(ms[i].len[0]-48)*60 + (int)(ms[i].len[2]-48)*10 + (int)(ms[i].len[3]-48)>=100)
+            cout<<ms[i].name<<" "<<ms[i].date<<" "<<ms[i].time<<" "<< ms[i].len<<" "<<ms[i].genre<<" "<<ms[i].budget<<endl;
+}
