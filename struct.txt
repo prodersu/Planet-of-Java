@@ -1,4 +1,4 @@
-// Example program
+//task1
 #include <iostream>
 #include <string>
 using namespace std;
@@ -20,7 +20,7 @@ int main()
     cout<<"The best striker is: ";
     int max=0, maxi;
     for(int i = 0; i<n; i++)
-        if(players[i].games>max){
+        if(players[i].amplua == "striker" and players[i].goals>max){
             max = players[i].games;
             maxi = i;
         }
@@ -99,7 +99,7 @@ int main()
     double aver = sum/n;
     for(int i = 0; i<n;i++)
         if(items[i].price>aver)
-            cout<<items[i].name<<items[i].count<<items[i].price<<items[i].producer<<items[i].date<<endl;
+            cout<<items[i].name<<" "<<items[i].count<<" "<<items[i].price<<" "<<items[i].producer<<" "<<items[i].date<<endl;
             
     
 }
@@ -133,11 +133,39 @@ int main()
     cout<<"Count of engineers: "<<count<<endl;
     for(int i = 0; i<n;i++)
         if(ws[i].pos=="engineer")
-            cout<<ws[i].surname<<ws[i].age<<ws[i].edu<<ws[i].pos<<endl;
+            cout<<ws[i].surname<<" "<<ws[i].age<<" "<<ws[i].edu<<" "<<ws[i].pos<<endl;
             
     
 }
 
+
+// task5
+#include <iostream>
+#include <string>
+struct Train{
+    int num;
+    string arrive;
+    string dep;
+    string des;
+    double dist;
+};
+double minut(string time){
+    double min = 0.0;
+    min = (int(time[0]-48)*10 + int(time[1] -48)) + (int(time[3]-48)*10 + int(time[4]-48))/60;
+    return min;
+int main()
+{
+    int n;
+    cin>>n;
+    Train* tr = new Train[n];
+    for(int i = 0; i<n; i++)
+        cin>>tr[i].num>>tr[i].arrive>>tr[i].dep>>tr[i].des>>tr[i].dist;    
+    for(int i = 0; i<n; i++)
+        cout<<i+1<<". "<<tr[i].dist/(minut(tr[i].arrive) - minut(tr[i].dep))<<" km/h"<<endl;
+    for(int i = 0; i<n; i++)
+        if(tr[i].arr<tr[i].dep)
+            cout<<tr[i].num<<" "<<tr[i].arrive<<" "<<tr[i].dep<<" "<<tr[i].des<<" "<<tr[i].dist<<endl;
+}
 
 //task6
 #include <iostream>
